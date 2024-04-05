@@ -1,6 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Navbar, SignUp, Constent } from "./Index";
+import {
+  Navbar,
+  SignUp,
+  Constent,
+  PersonalDetails,
+  AdditionalDetails,
+} from "./Index";
 
 const App = () => {
   return (
@@ -13,6 +19,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route path="/constent" element={<Constent />} />
+          <Route path="/details" element={<PersonalDetails />} />
+          <Route path="/aditionalDetails" element={<AdditionalDetails />} />
         </Routes>
       </>
     </Router>

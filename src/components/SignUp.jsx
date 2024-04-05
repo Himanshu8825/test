@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// SignUp.js
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -16,18 +17,26 @@ const SignUp = () => {
     myRelative: "MALE_FEMALE",
   };
 
+  useEffect(() => {
+    // Fetch previously selected option from localStorage when component mounts
+    const storedSelectedOption = localStorage.getItem("selectedOption");
+    if (storedSelectedOption) {
+      setSelectedOption(storedSelectedOption);
+      const gender_ = obj[storedSelectedOption];
+      setGender(gender_);
+    }
+  }, []);
+
   const handleOptionChange = (e) => {
     const selectedValue = e.target.value;
 
     setSelectedOption(selectedValue);
+    localStorage.setItem("selectedOption", selectedValue);
 
     const gender_ = obj[selectedValue];
     setGender(gender_);
     console.log(gender_, selectedValue);
-    if (selectedValue === "MALE") {
-      setGender("MALE");
-    }
-    if (selectedValue !== "mySelf") {
+    if (selectedValue && selectedValue !== "mySelf") {
       navigate("/constent");
     }
   };
@@ -39,8 +48,9 @@ const SignUp = () => {
       console.log(gender_, selectedOption);
     }
   };
+
   return (
-    <div className="w-full h-screen  flex justify-center items-center">
+    <div className="w-full  flex justify-center items-center pb-8">
       <div className="w-[45%] shadow-primary/50 shadow-lg rounded-xl">
         <h1 className="text-2xl font-montserrat font-semibold text-center p-4">
           Sign Up

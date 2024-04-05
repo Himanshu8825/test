@@ -7,7 +7,7 @@ const Constent = () => {
   };
 
   return (
-    <div className="w-full h-screen  flex justify-center items-center">
+    <div className="w-full flex justify-center items-center  pb-8">
       <div className="w-[45%]   shadow-primary/50 shadow-lg rounded-xl ">
         <h1 className="text-2xl font-montserrat font-semibold text-center p-4">
           Constant
