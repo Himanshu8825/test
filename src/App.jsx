@@ -6,6 +6,8 @@ import {
   Constent,
   PersonalDetails,
   AdditionalDetails,
+  CarrerDetails,
+  FaimilyDetails,
 } from "./Index";
 
 const App = () => {
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/constent" element={<Constent />} />
           <Route path="/details" element={<PersonalDetails />} />
           <Route path="/aditionalDetails" element={<AdditionalDetails />} />
+          <Route path="/carrer" element={<CarrerDetails />} />
+          <Route path="/faimily" element={<FaimilyDetails />} />
         </Routes>
       </>
     </Router>
