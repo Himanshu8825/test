@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const stepsData = [
   { number: 1 },
@@ -10,11 +10,38 @@ const stepsData = [
 ];
 
 const AdditionalDetails = () => {
+  const [formData, setFormData] = useState({
+    personalAppearance: "",
+    country: "",
+    state: "",
+    city: "",
+    relocate: "",
+    dietType: "",
+    alcoholPreference: "",
+    smokingPreference: "",
+    maritalStatus: "",
+    contactNumber: "",
+    email: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
       <div className="flex gap-8 p-4 cursor-pointer">
-        {stepsData.map((step) => (
-          <div className="flex flex-col items-center gap-2">
+        {stepsData.map((step, index) => (
+          <div key={index} className="flex flex-col items-center gap-2">
             <div
               className={`p-6 w-[5px] h-[5px] rounded-full text-xl font-montserrat font-medium flex justify-center items-center ${
                 step.number === 1 || step.number === 2
@@ -29,18 +56,20 @@ const AdditionalDetails = () => {
         ))}
       </div>
       <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
-        
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
             <span>
               <h2 className="text-lg font-semibold font-montserrat  pb-2">
                 Personal Appearance
               </h2>
               <textarea
-                type="time"
+                type="text"
                 className="w-full py-4 mb-4 rounded-lg
                   focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Personal Appearance"
+                name="personalAppearance"
+                value={formData.personalAppearance}
+                onChange={handleChange}
               ></textarea>
             </span>
 
@@ -51,44 +80,50 @@ const AdditionalDetails = () => {
               </h2>
               <select
                 className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                id="profile"
-                name="profileSection"
+                id="country"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
               >
                 <option value="">Country</option>
-                <option value="mySelf">India</option>
-                <option value="myBrother">USA</option>
-                <option value="mySister">Pakistan</option>
-                <option value="mySon">Nepal</option>
-                <option value="myDaughter">Austrelia</option>
-                <option value="myFriend">Bangladesh</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Austrelia">Austrelia</option>
+                <option value="Bangladesh">Bangladesh</option>
               </select>
               <select
                 className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                id="profile"
-                name="profileSection"
+                id="state"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
               >
                 <option value="">State</option>
-                <option value="mySelf">Bihar</option>
-                <option value="myBrother">Jharkhand</option>
-                <option value="mySister">UP</option>
-                <option value="mySon">MP</option>
-                <option value="myDaughter">Kerla</option>
-                <option value="myFriend">Maharastra</option>
-                <option value="myRelative">Nagpur</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="UP">UP</option>
+                <option value="MP">MP</option>
+                <option value="Kerla">Kerla</option>
+                <option value="Maharastra">Maharastra</option>
+                <option value="Nagpur">Nagpur</option>
               </select>
               <select
                 className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                id="profile"
-                name="profileSection"
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
               >
                 <option value="">City</option>
-                <option value="mySelf">Patna</option>
-                <option value="myBrother">Aurangabad</option>
-                <option value="mySister">Samastipur</option>
-                <option value="mySon">Muzzafarpur</option>
-                <option value="myDaughter">Ara</option>
-                <option value="myFriend">Chhappra</option>
-                <option value="myRelative">Darbhanga</option>
+                <option value="Patna">Patna</option>
+                <option value="Aurangabad">Aurangabad</option>
+                <option value="Samastipur">Samastipur</option>
+                <option value="Muzzafarpur">Muzzafarpur</option>
+                <option value="Ara">Ara</option>
+                <option value="Chhappra">Chhappra</option>
+                <option value="Darbhanga">Darbhanga</option>
               </select>
             </span>
 
@@ -100,103 +135,131 @@ const AdditionalDetails = () => {
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="relocateYes"
+                  name="relocate"
+                  value="Yes"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="relocateYes"
+                  className=" font-montserrat font-medium"
+                >
                   Yes
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="relocateNo"
+                  name="relocate"
+                  value="No"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="relocateNo"
+                  className=" font-montserrat font-medium"
+                >
                   No
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="relocateNotSure"
+                  name="relocate"
+                  value="Not Sure"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="relocateNotSure"
+                  className=" font-montserrat font-medium"
+                >
                   Not Sure
                 </label>
               </div>
             </span>
 
-            <span className="">
-              <h2 className=" font-semibold font-montserrat pt-6 ">
-                Diet Type
-                <sup className="text-red-600 font-bold ">*</sup>
+            <span className="mt-4">
+              <h2 className=" font-semibold font-montserrat">
+                Diet Type <sup className="text-red-600 font-bold ">*</sup>
               </h2>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
-                  className="mr-2 "
+                  id="vegetarian"
+                  name="dietType"
+                  value="Vegetarian"
+                  className="mr-2"
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
-                  Vegiterian
+                <label
+                  htmlFor="vegetarian"
+                  className=" font-montserrat font-medium"
+                >
+                  Vegetarian
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="nonVegetarian"
+                  name="dietType"
+                  value="Non - Vegetarian"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
-                  Non-Vegiterian
+                <label
+                  htmlFor="nonVegetarian"
+                  className=" font-montserrat font-medium"
+                >
+                  Non - Vegetarian
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="occasionallyNonVegetarian "
+                  name="dietType"
+                  value="Occasionally Non - Vegetarian"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="occasionallyNonVegetarian"
+                  className=" font-montserrat font-medium"
+                >
                   Occasionally Non - Vegetarian
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="eggetarian"
+                  name="dietType"
+                  value="Eggetarian"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="eggetarian"
+                  className=" font-montserrat font-medium"
+                >
                   Eggetarian
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="vegan"
+                  name="dietType"
+                  value="Vegan"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label htmlFor="vegan" className=" font-montserrat font-medium">
                   Vegan
                 </label>
               </div>
@@ -204,109 +267,140 @@ const AdditionalDetails = () => {
 
             <span className="mt-4">
               <h2 className=" font-semibold font-montserrat">
-                Alcohol Consumption Preference
+                Alcohol Consumption Preference{" "}
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
-                  className="mr-2 "
+                  id="regular"
+                  name="alcoholPreference"
+                  value="Regular"
+                  className="mr-2"
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="regular"
+                  className=" font-montserrat font-medium"
+                >
                   Regular
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="occasional"
+                  name="alcoholPreference"
+                  value="Occasional"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="occasional"
+                  className=" font-montserrat font-medium"
+                >
                   Occasional
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="social"
+                  name="alcoholPreference"
+                  value="Social"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
-                  Social
+                <label
+                  htmlFor="social"
+                  className=" font-montserrat font-medium"
+                >
+                  social
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="notatall"
+                  name="alcoholPreference"
+                  value="Not at all"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="notatall"
+                  className=" font-montserrat font-medium"
+                >
                   Not at all
                 </label>
               </div>
             </span>
-
-            <span className="">
-              <h2 className=" font-semibold font-montserrat pt-6 ">
+            <span className="mt-4">
+              <h2 className=" font-semibold font-montserrat">
                 Smoking Preference
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
-                  className="mr-2 "
+                  id="regular"
+                  name="smokingPreference"
+                  value="Regular"
+                  className="mr-2"
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="regular"
+                  className=" font-montserrat font-medium"
+                >
                   Regular
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="occasional"
+                  name="smokingPreference"
+                  value="Occasional"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="occasional"
+                  className=" font-montserrat font-medium"
+                >
                   Occasional
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="social"
+                  name="smokingPreference"
+                  value="Social"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
-                  Social
+                <label
+                  htmlFor="social"
+                  className=" font-montserrat font-medium"
+                >
+                  social
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="notatall"
+                  name="smokingPreference"
+                  value="Not at all"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="notatall"
+                  className=" font-montserrat font-medium"
+                >
                   Not at all
                 </label>
               </div>
@@ -319,48 +413,64 @@ const AdditionalDetails = () => {
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="single"
+                  name="maritalStatus"
+                  value="Single"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="single"
+                  className=" font-montserrat font-medium"
+                >
                   Single
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="divorced"
+                  name="maritalStatus"
+                  value="Divorced"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
-                  Divorce
+                <label
+                  htmlFor="divorced"
+                  className=" font-montserrat font-medium"
+                >
+                  Divorced
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="awaitingDivorce"
+                  name="maritalStatus"
+                  value="Awaiting Divorce"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="awaitingDivorce"
+                  className=" font-montserrat font-medium"
+                >
                   Awaiting Divorce
                 </label>
               </div>
               <div className="flex pl-4">
                 <input
                   type="radio"
-                  id="male"
-                  name="gender"
-                  value="MALE"
+                  id="widowOrWidower"
+                  name="maritalStatus"
+                  value="Widow or Widower"
                   className="mr-2 "
+                  onChange={handleChange}
                 />
-                <label htmlFor="male" className=" font-montserrat font-medium">
+                <label
+                  htmlFor="widowOrWidower"
+                  className=" font-montserrat font-medium"
+                >
                   Widow or Widower
                 </label>
               </div>
@@ -375,6 +485,9 @@ const AdditionalDetails = () => {
                 type="text"
                 className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Contact Number"
+                name="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
               />
             </span>
 
@@ -387,11 +500,17 @@ const AdditionalDetails = () => {
                 type="email"
                 className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Email Id"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
               />
             </span>
 
             <div className="flex justify-center  pb-4">
-              <button className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white">
+              <button
+                type="submit"
+                className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+              >
                 Continue
               </button>
             </div>

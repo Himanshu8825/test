@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const stepsData = [
   { number: 1, label: "Personal Details" },
@@ -10,6 +10,32 @@ const stepsData = [
 ];
 
 const PersonalDetails = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    dateOfBirth: "",
+    timeOfBirth: "",
+    country: "",
+    state: "",
+    city: "",
+    manglikStatus: "",
+    horoscopeMatching: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <div>
       <div className="w-full flex flex-col justify-center items-center pb-8">
@@ -33,7 +59,7 @@ const PersonalDetails = () => {
           <h1 className="text-2xl font-montserrat font-semibold text-center p-4">
             Sign Up
           </h1>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col w-[80%] h-[80%] mx-auto">
               <span>
                 <h2 className="text-lg font-semibold font-montserrat  pb-2">
@@ -42,19 +68,25 @@ const PersonalDetails = () => {
                 </h2>
                 <input
                   type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                   placeholder="First Name"
                 />
               </span>
               <span>
                 <h2 className="text-lg font-semibold font-montserrat  pb-2">
-                  Bride/Groom - Middile Name
+                  Bride/Groom - Middle Name
                   <sup className="text-red-600 font-bold ">*</sup>
                 </h2>
                 <input
                   type="text"
+                  name="middleName"
+                  value={formData.middleName}
+                  onChange={handleChange}
                   className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="First Name"
+                  placeholder="Middle Name"
                 />
               </span>
               <span>
@@ -64,8 +96,11 @@ const PersonalDetails = () => {
                 </h2>
                 <input
                   type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="First Name"
+                  placeholder="Last Name"
                 />
               </span>
               <span>
@@ -75,8 +110,11 @@ const PersonalDetails = () => {
                 </h2>
                 <input
                   type="date"
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
                   className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="First Name"
+                  placeholder="Date Of Birth"
                 />
               </span>
               <span>
@@ -86,75 +124,80 @@ const PersonalDetails = () => {
                 </h2>
                 <input
                   type="time"
+                  name="timeOfBirth"
+                  value={formData.timeOfBirth}
+                  onChange={handleChange}
                   className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="First Name"
+                  placeholder="Time Of Birth"
                 />
               </span>
-
               <span>
                 <h2 className="text-lg font-semibold font-montserrat  pb-2">
                   Place Of Birth
                   <sup className="text-red-600 font-bold ">*</sup>
                 </h2>
                 <select
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                  id="profile"
-                  name="profileSection"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">Country</option>
-                  <option value="mySelf">India</option>
-                  <option value="myBrother">USA</option>
-                  <option value="mySister">Pakistan</option>
-                  <option value="mySon">Nepal</option>
-                  <option value="myDaughter">Austrelia</option>
-                  <option value="myFriend">Bangladesh</option>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Nepal">Nepal</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Bangladesh">Bangladesh</option>
                 </select>
                 <select
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                  id="profile"
-                  name="profileSection"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">State</option>
-                  <option value="mySelf">Bihar</option>
-                  <option value="myBrother">Jharkhand</option>
-                  <option value="mySister">UP</option>
-                  <option value="mySon">MP</option>
-                  <option value="myDaughter">Kerla</option>
-                  <option value="myFriend">Maharastra</option>
-                  <option value="myRelative">Nagpur</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="UP">UP</option>
+                  <option value="MP">MP</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Nagpur">Nagpur</option>
                 </select>
                 <select
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                  id="profile"
-                  name="profileSection"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">City</option>
-                  <option value="mySelf">Patna</option>
-                  <option value="myBrother">Aurangabad</option>
-                  <option value="mySister">Samastipur</option>
-                  <option value="mySon">Muzzafarpur</option>
-                  <option value="myDaughter">Ara</option>
-                  <option value="myFriend">Chhappra</option>
-                  <option value="myRelative">Darbhanga</option>
+                  <option value="Patna">Patna</option>
+                  <option value="Aurangabad">Aurangabad</option>
+                  <option value="Samastipur">Samastipur</option>
+                  <option value="Muzaffarpur">Muzaffarpur</option>
+                  <option value="Ara">Ara</option>
+                  <option value="Chhapra">Chhapra</option>
+                  <option value="Darbhanga">Darbhanga</option>
                 </select>
               </span>
-
-              <span className="">
-                <h2 className=" font-semibold font-montserrat">
+              <span>
+                <h2 className="text-lg font-semibold font-montserrat  pb-2">
                   Manglik Status
                   <sup className="text-red-600 font-bold ">*</sup>
                 </h2>
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="manglikYes"
+                    name="manglikStatus"
+                    value="Yes"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="manglikYes"
+                    className="font-montserrat font-medium"
                   >
                     Yes
                   </label>
@@ -162,14 +205,15 @@ const PersonalDetails = () => {
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="manglikNo"
+                    name="manglikStatus"
+                    value="No"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="manglikNo"
+                    className="font-montserrat font-medium"
                   >
                     No
                   </label>
@@ -177,14 +221,15 @@ const PersonalDetails = () => {
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="manglikPartials"
+                    name="manglikStatus"
+                    value="Partials"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="manglikPartials"
+                    className="font-montserrat font-medium"
                   >
                     Partials
                   </label>
@@ -192,36 +237,37 @@ const PersonalDetails = () => {
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="manglikNotSure"
+                    name="manglikStatus"
+                    value="Not Sure"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="manglikNotSure"
+                    className="font-montserrat font-medium"
                   >
                     Not Sure
                   </label>
                 </div>
               </span>
-
-              <span className="">
-                <h2 className=" font-semibold font-montserrat pt-6 ">
+              <span>
+                <h2 className="text-lg font-semibold font-montserrat pt-6">
                   Horoscope Matching
                   <sup className="text-red-600 font-bold ">*</sup>
                 </h2>
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="horoscopeRequired"
+                    name="horoscopeMatching"
+                    value="Required"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="horoscopeRequired"
+                    className="font-montserrat font-medium"
                   >
                     Required
                   </label>
@@ -229,14 +275,15 @@ const PersonalDetails = () => {
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="horoscopeNotRequired"
+                    name="horoscopeMatching"
+                    value="Not Required"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="horoscopeNotRequired"
+                    className="font-montserrat font-medium"
                   >
                     Not Required
                   </label>
@@ -244,25 +291,28 @@ const PersonalDetails = () => {
                 <div className="flex pl-4">
                   <input
                     type="radio"
-                    id="male"
-                    name="gender"
-                    value="MALE"
-                    className="mr-2 "
+                    id="horoscopeNotImportant"
+                    name="horoscopeMatching"
+                    value="Not Important"
+                    onChange={handleChange}
+                    className="mr-2"
                   />
                   <label
-                    htmlFor="male"
-                    className=" font-montserrat font-medium"
+                    htmlFor="horoscopeNotImportant"
+                    className="font-montserrat font-medium"
                   >
                     Not Important
                   </label>
                 </div>
               </span>
-
               <div className="flex gap-8 p-8 justify-center items-center">
                 <button className="px-8 py-2 border border-[#A92525]  font-montserrat rounded-lg text-[#A92525]v">
                   Back
                 </button>
-                <button className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white">
+                <button
+                  type="submit"
+                  className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+                >
                   Continue
                 </button>
               </div>
