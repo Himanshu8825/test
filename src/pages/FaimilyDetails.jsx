@@ -1,54 +1,45 @@
 import React, { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFaimilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
 
 const FamilyDetails = () => {
-  const [formData, setFormData] = useState({
-    //!Initial form fields and their values
-    fatherFirstName: "",
-    fatherMiddleName: "",
-    fatherLastName: "",
-    fatherOccupation: "",
-    motherFirstName: "",
-    motherMiddleName: "",
-    motherLastName: "",
-    motherOccupation: "",
-    siblings: [{ name: "", status: "" }],
-    livesWithFamily: "",
-    country: "",
-    state: "",
-    city: "",
-    religion: "",
-    community: "",
-  });
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.faimilyDetails);
+
+
+
 
   //!Function to handle changes in form fields
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     if (name === "siblingsName" || name === "siblingsStatus") {
-      //!Update sibling data if it's a sibling field
       const updatedSiblings = [...formData.siblings];
-      updatedSiblings[index][name === "siblingsName" ? "name" : "status"] =
-        value;
-      setFormData({ ...formData, siblings: updatedSiblings });
+      updatedSiblings[index] = {
+        ...updatedSiblings[index],
+        [name === "siblingsName" ? "name" : "status"]: value,
+      };
+      dispatch(updateFaimilyDetails({ siblings: updatedSiblings }));
     } else {
-      //!Update other form fields
-      setFormData({ ...formData, [name]: value });
+      dispatch(updateFaimilyDetails({ [name]: value }));
     }
   };
 
+
   //!Function to add a new sibling field
   const handleAddSibling = () => {
-    setFormData({
-      ...formData,
-      siblings: [...formData.siblings, { name: "", status: "" }],
-    });
+    dispatch(
+      updateFaimilyDetails({
+        siblings: [...formData.siblings, { name: "", status: "" }],
+      })
+    );
   };
 
   //!Function to remove a sibling field
   const handleRemoveSibling = (index) => {
     const updatedSiblings = [...formData.siblings];
     updatedSiblings.splice(index, 1);
-    setFormData({ ...formData, siblings: updatedSiblings });
+    dispatch(updateFaimilyDetails({ siblings: updatedSiblings }));
   };
 
   //!Function to handle form submission

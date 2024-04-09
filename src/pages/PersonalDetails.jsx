@@ -1,34 +1,14 @@
-import React, { useState } from "react";
-
-const stepsData = [
-  { number: 1, label: "Personal Details" },
-  { number: 2 },
-  { number: 3 },
-  { number: 4 },
-  { number: 5 },
-  { number: 6 },
-];
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePersonalDetails } from "../redux/Reducers/PersonalDetailsReducers";
 
 const PersonalDetails = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    dateOfBirth: "",
-    timeOfBirth: "",
-    country: "",
-    state: "",
-    city: "",
-    manglikStatus: "",
-    horoscopeMatching: "",
-  });
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.personalDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    dispatch(updatePersonalDetails({ [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -39,22 +19,6 @@ const PersonalDetails = () => {
   return (
     <div>
       <div className="w-full flex flex-col justify-center items-center pb-8">
-        <div className="flex gap-8 p-4 cursor-pointer">
-          {stepsData.map((step) => (
-            <div className="flex flex-col items-center">
-              <div
-                className={`p-6 w-[5px] h-[5px] rounded-full text-xl font-montserrat font-medium flex justify-center items-center ${
-                  step.label === "Personal Details"
-                    ? "text-white bg-[#A92525] "
-                    : "text-black shadow-black shadow-sm"
-                }`}
-              >
-                {step.number}
-              </div>
-              <p className="font-montserrat text-sm">{step.label}</p>
-            </div>
-          ))}
-        </div>
         <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
           <h1 className="text-2xl font-montserrat font-semibold text-center p-4">
             Sign Up

@@ -1,35 +1,14 @@
 import React, { useState } from "react";
-
-const stepsData = [
-  { number: 1 },
-  { number: 2, label: "Additional Details" },
-  { number: 3 },
-  { number: 4 },
-  { number: 5 },
-  { number: 6 },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { updateAdditionalDetails } from "../redux/Reducers/AdditionalDetailsReducers";
 
 const AdditionalDetails = () => {
-  const [formData, setFormData] = useState({
-    personalAppearance: "",
-    country: "",
-    state: "",
-    city: "",
-    relocate: "",
-    dietType: "",
-    alcoholPreference: "",
-    smokingPreference: "",
-    maritalStatus: "",
-    contactNumber: "",
-    email: "",
-  });
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.additionalDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    dispatch(updateAdditionalDetails({ [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -39,22 +18,6 @@ const AdditionalDetails = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="flex gap-8 p-4 cursor-pointer">
-        {stepsData.map((step, index) => (
-          <div key={index} className="flex flex-col items-center gap-2">
-            <div
-              className={`p-6 w-[5px] h-[5px] rounded-full text-xl font-montserrat font-medium flex justify-center items-center ${
-                step.number === 1 || step.number === 2
-                  ? "text-white bg-[#A92525] "
-                  : "text-black shadow-black shadow-sm"
-              }`}
-            >
-              {step.number}
-            </div>
-            <p className="font-montserrat text-sm">{step.label}</p>
-          </div>
-        ))}
-      </div>
       <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">

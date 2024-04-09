@@ -1,11 +1,18 @@
 // SignUp.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { PersonalDetails } from "../Index";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [selectedOption, setSelectedOption] = useState("");
   const [gender, setGender] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleChange = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    setShow(true);
+  };
 
   let obj = {
     mySelf: "MALE_FEMALE",
@@ -144,7 +151,10 @@ const SignUp = () => {
                 placeholder="Mobile"
               />
             </div>
-            <button className="px-6 py-2 bg-[#A92525] font-montserrat rounded-lg text-white">
+            <button
+              onClick={handleChange}
+              className="px-6 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+            >
               Send OTP
             </button>
             <div className="flex items-center justify-center w-full pt-8">
@@ -162,6 +172,11 @@ const SignUp = () => {
             </button>
           </div>
         </form>
+        {show && (
+          <div>
+            <PersonalDetails />
+          </div>
+        )}
       </div>
     </div>
   );

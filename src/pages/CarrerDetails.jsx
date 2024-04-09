@@ -1,28 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCarrerDetails } from "../redux/Reducers/CarrerDetailsReducers";
 
 const CarrerDetails = () => {
-  const [formData, setFormData] = useState({
-    education: "",
-    highestQualification: "",
-    schoolOrUniversity: "",
-    profession: "",
-    currentDesignation: "",
-    previousOccupation: "",
-    annualIncomeType: "",
-    annualIncome: "",
-  });
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.carrerDetails);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    dispatch(updateCarrerDetails({ [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); 
+    console.log(formData);
   };
 
   return (
@@ -274,7 +265,7 @@ const CarrerDetails = () => {
               />
             </span>
 
-            <div  className="mx-auto p-8">
+            <div className="mx-auto p-8">
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"

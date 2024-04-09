@@ -5,6 +5,7 @@ import PersonalDetails from "./pages/PersonalDetails";
 import AdditionalDetails from "./pages/AdditionalDetails";
 import CarrerDetails from "./pages/CarrerDetails";
 import FaimilyDetails from "./pages/FaimilyDetails";
+import Stapper from "./components/Stapper";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   AdditionalDetails,
   CarrerDetails,
   FaimilyDetails,
+  Stapper,
 };
