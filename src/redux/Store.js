@@ -3,6 +3,7 @@ import PersonalDetailsReducers from "./Reducers/PersonalDetailsReducers";
 import AdditionalDetailsReducers from "./Reducers/AdditionalDetailsReducers";
 import FaimilyDetailsReducers from "./Reducers/FaimilyDetailsReducers";
 import CarrerDetailsReducers from "./Reducers/CarrerDetailsReducers";
+import StapperReducers from "./Reducers/StapperReducers";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     additionalDetails: AdditionalDetailsReducers,
     faimilyDetails: FaimilyDetailsReducers,
     carrerDetails: CarrerDetailsReducers,
+    stapeers: StapperReducers,
   },
 });

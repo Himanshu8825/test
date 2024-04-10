@@ -2,16 +2,19 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCarrerDetails } from "../redux/Reducers/CarrerDetailsReducers";
 import { carrerData } from "../Data";
+import { StapperAction } from "../redux/action/StepersAction";
 
 const CarrerDetails = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.carrerDetails);
 
- 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updateCarrerDetails({ [name]: value }));
+  };
+
+  const updateCurrentState = () => {
+    dispatch(StapperAction(4));
   };
 
   const handleSubmit = (e) => {
@@ -81,6 +84,7 @@ const CarrerDetails = () => {
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+                onClick={updateCurrentState}
               >
                 Continue
               </button>

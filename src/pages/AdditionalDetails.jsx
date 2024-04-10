@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAdditionalDetails } from "../redux/Reducers/AdditionalDetailsReducers";
 import { selectPlace, additionalRadio } from "../Data";
+import { StapperAction } from "../redux/action/StepersAction";
 
 const AdditionalDetails = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,10 @@ const AdditionalDetails = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updateAdditionalDetails({ [name]: value }));
+  };
+
+  const updateCurrentState = () => {
+    dispatch(StapperAction(3));
   };
 
   const handleSubmit = (e) => {
@@ -121,6 +126,7 @@ const AdditionalDetails = () => {
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+                onClick={updateCurrentState}
               >
                 Continue
               </button>

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePersonalDetails } from "../redux/Reducers/PersonalDetailsReducers";
 import { inputFields, selectPlace, radioGroups } from "../Data";
-
+import { StapperAction } from "../redux/action/StepersAction";
 
 const PersonalDetails = () => {
   const dispatch = useDispatch();
@@ -11,6 +11,10 @@ const PersonalDetails = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updatePersonalDetails({ [name]: value }));
+  };
+
+  const updateCurrentState = () => {
+    dispatch(StapperAction(2));
   };
 
   const handleSubmit = (e) => {
@@ -100,6 +104,7 @@ const PersonalDetails = () => {
                 <button
                   type="submit"
                   className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+                  onClick={updateCurrentState}
                 >
                   Continue
                 </button>

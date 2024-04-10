@@ -3,6 +3,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFaimilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
 import { selectPlace, faimilyData } from "../Data";
+import { StapperAction } from "../redux/action/StepersAction";
 
 const FamilyDetails = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ const FamilyDetails = () => {
     const updatedSiblings = [...formData.siblings];
     updatedSiblings.splice(index, 1);
     dispatch(updateFaimilyDetails({ siblings: updatedSiblings }));
+  };
+
+  const updateCurrentState = () => {
+    dispatch(StapperAction(5));
   };
 
   //!Function to handle form submission
@@ -250,6 +255,7 @@ const FamilyDetails = () => {
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
+                onClick={updateCurrentState}
               >
                 Continue
               </button>
