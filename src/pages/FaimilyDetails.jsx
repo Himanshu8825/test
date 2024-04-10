@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFaimilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
+import { selectPlace, faimilyData } from "../Data";
 
 const FamilyDetails = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.faimilyDetails);
-
-
-
 
   //!Function to handle changes in form fields
   const handleChange = (e, index) => {
@@ -24,7 +22,6 @@ const FamilyDetails = () => {
       dispatch(updateFaimilyDetails({ [name]: value }));
     }
   };
-
 
   //!Function to add a new sibling field
   const handleAddSibling = () => {
@@ -54,103 +51,46 @@ const FamilyDetails = () => {
       <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto">
-            {/* Father's Name section */}
-            <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2">
-                Father’s Name
-              </h2>
-              <div className="flex">
-                <input
-                  type="text"
-                  name="fatherFirstName"
-                  value={formData.fatherFirstName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] translate-x-2"
-                  placeholder="First Name"
-                />
-                <input
-                  type="text"
-                  name="fatherMiddleName"
-                  value={formData.fatherMiddleName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="Middle Name"
-                />
-                <input
-                  type="text"
-                  name="fatherLastName"
-                  value={formData.fatherLastName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] -translate-x-2"
-                  placeholder="Last Name"
-                />
-              </div>
-            </span>
-
-            {/* Father's Occupation section */}
-            <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2">
-                Father’s Occupation
-                <sup className="text-red-600 font-bold ">*</sup>
-              </h2>
-              <input
-                type="text"
-                name="fatherOccupation"
-                value={formData.fatherOccupation}
-                onChange={handleChange}
-                className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                placeholder="Father’s Occupation"
-              />
-            </span>
-
-            {/* Mother's Name section */}
-            <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2">
-                Mother’s Name
-              </h2>
-              <div className="flex">
-                <input
-                  type="text"
-                  name="motherFirstName"
-                  value={formData.motherFirstName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] translate-x-2"
-                  placeholder="First Name"
-                />
-                <input
-                  type="text"
-                  name="motherMiddleName"
-                  value={formData.motherMiddleName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                  placeholder="Middle Name"
-                />
-                <input
-                  type="text"
-                  name="motherLastName"
-                  value={formData.motherLastName}
-                  onChange={handleChange}
-                  className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] -translate-x-2"
-                  placeholder="Last Name"
-                />
-              </div>
-            </span>
-
-            {/* Mother's Occupation section */}
-            <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2">
-                Mother’s Occupation
-                <sup className="text-red-600 font-bold ">*</sup>
-              </h2>
-              <input
-                type="text"
-                name="motherOccupation"
-                value={formData.motherOccupation}
-                onChange={handleChange}
-                className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
-                placeholder="Mother’s Occupation"
-              />
-            </span>
+            {faimilyData.map((field, index) => (
+              <span key={index}>
+                <h2 className="text-lg font-semibold font-montserrat pb-2">
+                  {field.label}
+                  {field.name && (
+                    <sup className="text-red-600 font-bold">*</sup>
+                  )}
+                </h2>
+                {field.names ? (
+                  <div className="flex">
+                    {field.names.map((name, i) => (
+                      <input
+                        key={i}
+                        type="text"
+                        name={name}
+                        value={formData[name]}
+                        onChange={handleChange}
+                        className={`w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] ${
+                          i === 0
+                            ? "translate-x-2"
+                            : i === 2
+                            ? "-translate-x-2"
+                            : ""
+                        }`}
+                        placeholder={field.placeholders[i]}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
+                    placeholder={field.placeholder}
+                  />
+                )}
+              </span>
+            ))}
 
             {/* Siblings section */}
             <span>
@@ -237,54 +177,26 @@ const FamilyDetails = () => {
 
             {/* Family Settled section */}
             <span>
-              <h2 className="text-lg font-semibold font-montserrat pt-6">
+              <h2 className="text-lg font-semibold font-montserrat  pb-2">
                 Family Settled
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              <select
-                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-              >
-                <option value="">Country</option>
-                <option value="India">India</option>
-                <option value="USA">USA</option>
-                <option value="Pakistan">Pakistan</option>
-                <option value="Nepal">Nepal</option>
-                <option value="Australia">Australia</option>
-                <option value="Bangladesh">Bangladesh</option>
-              </select>
-              <select
-                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-              >
-                <option value="">State</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="UP">UP</option>
-                <option value="MP">MP</option>
-                <option value="Kerela">Kerela</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Nagpur">Nagpur</option>
-              </select>
-              <select
-                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full "
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-              >
-                <option value="">City</option>
-                <option value="Patna">Patna</option>
-                <option value="Aurangabad">Aurangabad</option>
-                <option value="Samastipur">Samastipur</option>
-                <option value="Muzzafarpur">Muzzafarpur</option>
-                <option value="Ara">Ara</option>
-                <option value="Chhapra">Chhapra</option>
-                <option value="Darbhanga">Darbhanga</option>
-              </select>
+              {selectPlace.map((place) => (
+                <select
+                  key={place.name}
+                  name={place.name}
+                  value={formData[place.name]}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                >
+                  <option value="">{place.label}</option>
+                  {place.options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ))}
             </span>
 
             {/* Religion section */}

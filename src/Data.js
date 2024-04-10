@@ -90,4 +90,125 @@ const radioGroups = [
   },
 ];
 
-export { inputFields, selectPlace, radioGroups };
+const additionalRadio = [
+  {
+    title: "Open/Plan to Relocate in Future",
+    name: "relocate",
+    options: ["Yes", "No", "Not Sure"],
+  },
+  {
+    title: "Diet Type",
+    name: "dietType",
+    options: [
+      "Vegetarian",
+      "Non - Vegetarian",
+      "Occasionally Non - Vegetarian",
+      "Eggetarian",
+      "Vegan",
+    ],
+  },
+  {
+    title: "Alcohol Consumption Preference",
+    name: "alcoholPreference",
+    options: ["Regular", "Occasional", "Social", "Not at all"],
+  },
+  {
+    title: "Smoking Preference",
+    name: "smokingPreference",
+    options: ["Regular", "Occasional", "Social", "Not at all"],
+  },
+  {
+    title: "Martial Status",
+    name: "maritalStatus",
+    options: ["Single", "Divorced", "Awaiting Divorce", "Widow or Widower"],
+  },
+];
+
+const carrerData = [
+  {
+    label: "Education",
+    type: "radio",
+    options: [
+      "High School and Below",
+      "Associate / Diploma",
+      "Bachelor's Degree",
+      "Master's Degree",
+      "Doctorate",
+    ],
+    name: "education",
+  },
+  {
+    label: "Highest Qualification",
+    type: "text",
+    name: "highestQualification",
+  },
+  {
+    label: "School / University",
+    type: "text",
+    name: "schoolOrUniversity",
+  },
+  {
+    label: "Profession",
+    type: "select",
+    options: ["", "Doctor", "Engineer", "Advocate", "Gov Job"],
+    name: "profession",
+  },
+  {
+    label: "Current Designation",
+    type: "text",
+    name: "currentDesignation",
+  },
+  {
+    label: "Previous Occupation",
+    type: "text",
+    name: "previousOccupation",
+  },
+  {
+    label: "Approximate Annual Income",
+    type: "radio",
+    options: [
+      "Indian Rupee (INR)",
+      "United States Dollar (USD)",
+      "United Arab Emirates Dirham (AED)",
+      "United Kingdom Pound (GBP)",
+    ],
+    name: "annualIncomeType",
+  },
+  {
+    label: "Annual Income",
+    type: "text",
+    name: "annualIncome",
+  },
+];
+
+const faimilyData = [
+  {
+    label: "Father’s Name",
+    names: ["fatherFirstName", "fatherMiddleName", "fatherLastName"],
+    placeholders: ["First Name", "Middle Name", "Last Name"],
+  },
+  {
+    label: "Father’s Occupation",
+    name: "fatherOccupation",
+    placeholder: "Father’s Occupation",
+  },
+  {
+    label: "Mother’s Name",
+    names: ["motherFirstName", "motherMiddleName", "motherLastName"],
+    placeholders: ["First Name", "Middle Name", "Last Name"],
+  },
+  {
+    label: "Mother’s Occupation",
+    name: "motherOccupation",
+    placeholder: "Mother’s Occupation",
+  },
+];
+
+export {
+  inputFields,
+  selectPlace,
+  radioGroups,
+  additionalRadio,
+  carrerData,
+  faimilyData,
+};
