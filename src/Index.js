@@ -6,6 +6,8 @@ import AdditionalDetails from "./pages/AdditionalDetails";
 import CarrerDetails from "./pages/CarrerDetails";
 import FaimilyDetails from "./pages/FaimilyDetails";
 import Stapper from "./components/Stapper";
+import Interest from "./pages/Interest";
+import PartnersDetails from "./pages/PartnersDetails";
 
 export {
   Navbar,
@@ -16,4 +18,6 @@ export {
   CarrerDetails,
   FaimilyDetails,
   Stapper,
+  Interest,
+  PartnersDetails
 };

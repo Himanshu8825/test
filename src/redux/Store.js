@@ -4,6 +4,7 @@ import AdditionalDetailsReducers from "./Reducers/AdditionalDetailsReducers";
 import FaimilyDetailsReducers from "./Reducers/FaimilyDetailsReducers";
 import CarrerDetailsReducers from "./Reducers/CarrerDetailsReducers";
 import StapperReducers from "./Reducers/StapperReducers";
+import interestsReducers from "./Reducers/InterestReducers";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     faimilyDetails: FaimilyDetailsReducers,
     carrerDetails: CarrerDetailsReducers,
     stapeers: StapperReducers,
+    interest: interestsReducers,
   },
 });

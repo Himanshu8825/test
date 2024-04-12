@@ -2,10 +2,12 @@ import {
   AdditionalDetails,
   CarrerDetails,
   FaimilyDetails,
+  Interest,
+  PartnersDetails,
   PersonalDetails,
 } from "../Index";
 
-const DisplayStepsform = ({currentStep}) => {
+const DisplayStepsform = ({ currentStep }) => {
   switch (currentStep) {
     case 1:
       return <PersonalDetails />;
@@ -15,6 +17,10 @@ const DisplayStepsform = ({currentStep}) => {
       return <CarrerDetails />;
     case 4:
       return <FaimilyDetails />;
+    case 5:
+      return <Interest />;
+    case 6:
+      return <PartnersDetails />;
     default:
       return null;
   }
