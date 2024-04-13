@@ -22,12 +22,8 @@ const App = () => {
 
         <Routes>
           <Route path="/" element={<SignUp />} />
-
           <Route path="/details" element={<Stapper />} />
-
-          <Route path="/add" element={<AdditionalDetails />} />
-          <Route path="/carrer" element={<CarrerDetails />} />
-          <Route path="/faimily" element={<FaimilyDetails />} />
+          <Route path="/constent" element={<Constent />} />
           <Route path="/sucess" element={<COmplete />} />
         </Routes>
       </>

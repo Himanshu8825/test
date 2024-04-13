@@ -7,18 +7,15 @@ import { StapperAction } from "../redux/action/StepersAction";
 const PersonalDetails = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.personalDetails);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(updatePersonalDetails({ [name]: value }));
   };
 
-  const updateCurrentState = () => {
-    dispatch(StapperAction(2));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(StapperAction(2));
     console.log(formData);
   };
 
@@ -135,7 +132,7 @@ const PersonalDetails = () => {
                 <button
                   type="submit"
                   className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
-                  onClick={updateCurrentState}
+                  // onClick={updateCurrentState}
                 >
                   Continue
                 </button>

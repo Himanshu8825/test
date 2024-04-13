@@ -63,6 +63,9 @@ const Stapper = () => {
     return newSteps;
   };
 
+
+
+  
   // Effect to update steps when currentStep changes
   useEffect(() => {
     // Create initial step state
@@ -95,7 +98,7 @@ const Stapper = () => {
           className={`rounded-full transition duration-500 ease-in-out shadow-md h-14 w-14 flex items-center justify-center py-3 cursor-pointer ${
             step.selected ? "bg-[#A92525] font-bold " : "bg-white shadow-md"
           }`}
-          onClick={() => updateCurrentStep(index + 1)}
+          onClick={() => updateCurrentStep(index + 1) }
         >
           {step.completed ? (
             <span className="text-white text-xl">{index + 1}</span>

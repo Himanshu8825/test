@@ -1,5 +1,3 @@
-// Interest.jsx
-
 import React, { useState } from "react";
 import { RiFileUploadFill, RiDeleteBin6Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +5,7 @@ import {
   updateAboutYourself,
   updatePhotos,
 } from "../redux/Reducers/InterestReducers";
+import { StapperAction } from "../redux/action/StepersAction";
 
 const Interest = () => {
   const dispatch = useDispatch();
@@ -36,9 +35,6 @@ const Interest = () => {
     dispatch(updatePhotos(updatedImages));
   };
 
-
-
-  
   const options = [
     { category: "Fun", values: ["Fun1", "Fun2", "Fun3", "Fun4"] },
     {

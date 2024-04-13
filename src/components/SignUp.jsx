@@ -1,7 +1,6 @@
 // SignUp.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PersonalDetails } from "../Index";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    setShow(true);
+    navigate('/details')
   };
 
   let obj = {
@@ -78,6 +77,7 @@ const SignUp = () => {
               name="profileSection"
               value={selectedOption}
               onChange={handleOptionChange}
+              required
             >
               <option value="">Profile</option>
               <option value="mySelf">My Self</option>
@@ -149,6 +149,7 @@ const SignUp = () => {
                 type="text"
                 className="w-full py-2 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Mobile"
+                required
               />
             </div>
             <button
@@ -172,11 +173,6 @@ const SignUp = () => {
             </button>
           </div>
         </form>
-        {show && (
-          <div>
-            <PersonalDetails />
-          </div>
-        )}
       </div>
     </div>
   );
