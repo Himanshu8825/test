@@ -151,22 +151,53 @@ const PartnersDetails = () => {
                 Location
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              {selectPlace.map((place) => (
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+              >
+                <option value="">Select Country</option>
+                {Object.keys(selectPlace).map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+
+              {formData.country && (
                 <select
-                  key={place.name}
-                  name={place.name}
-                  value={formData[place.name]}
+                  name="state"
+                  value={formData.state}
                   onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
-                  <option value="">{place.label}</option>
-                  {place.options.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
+                  <option value="">Select State</option>
+                  {selectPlace[formData.country].states.map((state) => (
+                    <option key={state.name} value={state.name}>
+                      {state.name}
                     </option>
                   ))}
                 </select>
-              ))}
+              )}
+
+              {formData.state && selectPlace[formData.country] && (
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                >
+                  <option value="">Select City</option>
+                  {selectPlace[formData.country].states
+                    .find((state) => state.name === formData.state)
+                    ?.cities.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                </select>
+              )}
             </span>
 
             {data2.map((section, index) => (

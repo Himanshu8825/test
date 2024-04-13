@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCarrerDetails } from "../redux/Reducers/CarrerDetailsReducers";
 import { carrerData } from "../Data";
@@ -7,10 +7,30 @@ import { StapperAction } from "../redux/action/StepersAction";
 const CarrerDetails = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.carrerDetails);
+  const [income, setIncome] = useState(formData.annualIncome);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updateCarrerDetails({ [name]: value }));
+    if (name === "annualIncomeType") {
+      switch (value) {
+        case "Indian Rupee (INR)":
+          setIncome(`₹${income.replace(/[^0-9]/g, "")}`);
+          break;
+        case "United States Dollar (USD)":
+          setIncome(`$${income.replace(/[^0-9.]/g, "")}`);
+          break;
+        case "United Arab Emirates Dirham (AED)":
+          setIncome(`AED ${income.replace(/[^0-9.]/g, "")}`);
+          break;
+        case "United Kingdom Pound (GBP)":
+          setIncome(`£${income.replace(/[^0-9.]/g, "")}`);
+          break;
+        default:
+          setIncome(income.replace(/[₹$AED£]/g, ""));
+      }
+    } else {
+      dispatch(updateCarrerDetails({ [name]: value }));
+    }
   };
 
   const updateCurrentState = () => {
@@ -54,7 +74,17 @@ const CarrerDetails = () => {
                       </label>
                     </div>
                   ))}
-                {field.type === "text" && (
+                {field.type === "text" && field.name === "annualIncome" && (
+                  <input
+                    type="text"
+                    name={field.name}
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
+                    placeholder={field.label}
+                  />
+                )}
+                {field.type === "text" && field.name !== "annualIncome" && (
                   <input
                     type="text"
                     name={field.name}

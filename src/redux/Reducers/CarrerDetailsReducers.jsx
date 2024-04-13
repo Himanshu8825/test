@@ -21,8 +21,11 @@ export const CarrerDetailsSlice = createSlice({
         ...action.payload,
       };
     },
+    updateIncome: (state, action) => {
+      state.annualIncome = action.payload;
+    },
   },
 });
 
-export const { updateCarrerDetails } = CarrerDetailsSlice.actions;
+export const { updateCarrerDetails, updateIncome } = CarrerDetailsSlice.actions;
 export default CarrerDetailsSlice.reducer;

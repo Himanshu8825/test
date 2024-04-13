@@ -18,9 +18,7 @@ const App = () => {
   return (
     <Router>
       <>
-        <div className="mb-8">
-          <Navbar />
-        </div>
+        <Navbar />
 
         <Routes>
           <Route path="/" element={<SignUp />} />

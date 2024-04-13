@@ -50,6 +50,44 @@ const FamilyDetails = () => {
     console.log(formData);
   };
 
+  const data1 = [
+    {
+      id: "livesWithFamilyYes",
+      value: "Yes",
+      label: "Yes",
+    },
+    {
+      id: "livesWithFamilyNo",
+      value: "No",
+      label: "No",
+    },
+  ];
+
+  const data2 = [
+    {
+      id: "religionHinduism",
+      value: "Hinduism",
+      label: "Hinduism",
+    },
+    {
+      id: "religionMuslim",
+      value: "Muslim",
+      label: "Muslim",
+    },
+    {
+      id: "religionSikh",
+      value: "Sikh",
+      label: "Sikh",
+    },
+  ];
+
+  const communityOptions = [
+    "Community1",
+    "Community2",
+    "Community3",
+    "Community4",
+  ];
+
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
       {/* Form container */}
@@ -146,37 +184,26 @@ const FamilyDetails = () => {
                 Bride/Groom Lives With Family
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              <div className="flex pl-4">
-                <input
-                  type="radio"
-                  id="livesWithFamilyYes"
-                  name="livesWithFamily"
-                  value="Yes"
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                <label
-                  htmlFor="livesWithFamilyYes"
-                  className="font-montserrat font-medium"
-                >
-                  Yes
-                </label>
-              </div>
-              <div className="flex pl-4">
-                <input
-                  type="radio"
-                  id="livesWithFamilyNo"
-                  name="livesWithFamily"
-                  value="No"
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                <label
-                  htmlFor="livesWithFamilyNo"
-                  className="font-montserrat font-medium"
-                >
-                  No
-                </label>
+              <div className="flex flex-col pl-4">
+                {data1.map((option) => (
+                  <div key={option.id} className="flex  items-center mr-4">
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="livesWithFamily"
+                      value={option.value}
+                      onChange={handleChange}
+                      className="mr-2"
+                      checked={formData.livesWithFamily === option.value}
+                    />
+                    <label
+                      htmlFor={option.id}
+                      className="font-montserrat font-medium"
+                    >
+                      {option.label}
+                    </label>
+                  </div>
+                ))}
               </div>
             </span>
 
@@ -186,22 +213,53 @@ const FamilyDetails = () => {
                 Family Settled
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              {selectPlace.map((place) => (
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+              >
+                <option value="">Select Country</option>
+                {Object.keys(selectPlace).map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+
+              {formData.country && (
                 <select
-                  key={place.name}
-                  name={place.name}
-                  value={formData[place.name]}
+                  name="state"
+                  value={formData.state}
                   onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
-                  <option value="">{place.label}</option>
-                  {place.options.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
+                  <option value="">Select State</option>
+                  {selectPlace[formData.country].states.map((state) => (
+                    <option key={state.name} value={state.name}>
+                      {state.name}
                     </option>
                   ))}
                 </select>
-              ))}
+              )}
+
+              {formData.state && selectPlace[formData.country] && (
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                >
+                  <option value="">Select City</option>
+                  {selectPlace[formData.country].states
+                    .find((state) => state.name === formData.state)
+                    ?.cities.map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                </select>
+              )}
             </span>
 
             {/* Religion section */}
@@ -210,21 +268,26 @@ const FamilyDetails = () => {
                 Religion
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              <div className="flex pl-4">
-                <input
-                  type="radio"
-                  id="religionHinduism"
-                  name="religion"
-                  value="Hinduism"
-                  onChange={handleChange}
-                  className="mr-2"
-                />
-                <label
-                  htmlFor="religionHinduism"
-                  className="font-montserrat font-medium"
-                >
-                  Hinduism
-                </label>
+              <div className="flex flex-col pl-4">
+                {data2.map((option) => (
+                  <div key={option.id} className="flex items-center mr-4">
+                    <input
+                      type="radio"
+                      id={option.id}
+                      name="religion"
+                      value={option.value}
+                      onChange={handleChange}
+                      className="mr-2"
+                      checked={formData.religion === option.value}
+                    />
+                    <label
+                      htmlFor={option.id}
+                      className="font-montserrat font-medium"
+                    >
+                      {option.label}
+                    </label>
+                  </div>
+                ))}
               </div>
             </span>
 
@@ -237,15 +300,14 @@ const FamilyDetails = () => {
               <div className="flex gap-4 items-center ">
                 <select
                   name="community"
-                  value={formData.community}
+                  value={formData.community || ""}
                   onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">Community</option>
-                  <option>Community1</option>
-                  <option>Community2</option>
-                  <option>Community3</option>
-                  <option>Community4</option>
+                  {communityOptions.map((option, index) => (
+                    <option key={index}>{option}</option>
+                  ))}
                 </select>
               </div>
             </span>
