@@ -9,6 +9,7 @@ import {
   CarrerDetails,
   FaimilyDetails,
   Stapper,
+  COmplete,
 } from "./Index";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/add" element={<AdditionalDetails />} />
           <Route path="/carrer" element={<CarrerDetails />} />
           <Route path="/faimily" element={<FaimilyDetails />} />
+          <Route path="/sucess" element={<COmplete />} />
         </Routes>
       </>
     </Router>

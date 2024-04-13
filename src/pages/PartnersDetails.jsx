@@ -1,7 +1,27 @@
-import React from "react";
-import { additionalRadio, selectPlace } from "../Data";
+import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { selectPlace } from "../Data";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePartner } from "../redux/Reducers/PartnerRedures";
+import { useNavigate } from "react-router-dom";
 
 const PartnersDetails = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const formData = useSelector((state) => state.partner);
+  const notify = () => toast("Here is your toast.");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(updatePartner({ [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/sucess");
+    console.log(formData);
+  };
+
   const data = [
     {
       title: "Martial Status",
@@ -15,6 +35,7 @@ const PartnersDetails = () => {
       ],
     },
   ];
+
   const data2 = [
     {
       title: "Education ",
@@ -24,7 +45,7 @@ const PartnersDetails = () => {
         "High School and Below",
         "Associate / Diploma",
         "Bachelor's Degree",
-        " Master's Degree",
+        " Master's Degree",
         "Doctorate",
       ],
     },
@@ -36,10 +57,11 @@ const PartnersDetails = () => {
         "Private Company",
         "Public / Government Sector",
         "Business / Self Employed",
-        " Homemaker",
+        " Homemaker",
       ],
     },
   ];
+
   const data3 = [
     {
       title: "Diet Type ",
@@ -49,7 +71,7 @@ const PartnersDetails = () => {
         "Vegetarian",
         "Non - Vegetarian",
         "Occasionally Non - Vegetarian ",
-        " Eggetarian",
+        " Eggetarian",
         "Vegan",
       ],
     },
@@ -75,7 +97,7 @@ const PartnersDetails = () => {
         <h1 className="font-montserrat font-semibold text-xl text-center pb-8">
           Basic Details
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
             {data.map((section, index) => (
               <span key={index} className="mt-4">
@@ -91,7 +113,7 @@ const PartnersDetails = () => {
                       name={section.name}
                       value={option}
                       className="mr-2"
-                      //   onChange={handleChange}
+                      onChange={handleChange}
                     />
                     <label
                       htmlFor={`${section.name}-${option}`}
@@ -112,8 +134,8 @@ const PartnersDetails = () => {
               <div className="flex gap-4 items-center ">
                 <select
                   name="community"
-                  //   value={formData.community}
-                  //   onChange={handleChange}
+                  value={formData.community || ""}
+                  onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">Community</option>
@@ -133,8 +155,8 @@ const PartnersDetails = () => {
                 <select
                   key={place.name}
                   name={place.name}
-                  //   value={formData[place.name]}
-                  //   onChange={handleChange}
+                  value={formData[place.name]}
+                  onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">{place.label}</option>
@@ -161,7 +183,7 @@ const PartnersDetails = () => {
                       name={section.name}
                       value={option}
                       className="mr-2"
-                      //   onChange={handleChange}
+                      onChange={handleChange}
                     />
                     <label
                       htmlFor={`${section.name}-${option}`}
@@ -181,9 +203,9 @@ const PartnersDetails = () => {
               </h2>
               <div className="flex gap-4 items-center ">
                 <select
-                  name="community"
-                  //   value={formData.community}
-                  //   onChange={handleChange}
+                  name="profession"
+                  value={formData.profession}
+                  onChange={handleChange}
                   className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">Profession</option>
@@ -208,7 +230,7 @@ const PartnersDetails = () => {
                       name={section.name}
                       value={option}
                       className="mr-2"
-                      //   onChange={handleChange}
+                      onChange={handleChange}
                     />
                     <label
                       htmlFor={`${section.name}-${option}`}
@@ -225,7 +247,7 @@ const PartnersDetails = () => {
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
-                //   onClick={updateCurrentState}
+                onClick={notify}
               >
                 Done
               </button>

@@ -8,6 +8,7 @@ import FaimilyDetails from "./pages/FaimilyDetails";
 import Stapper from "./components/Stapper";
 import Interest from "./pages/Interest";
 import PartnersDetails from "./pages/PartnersDetails";
+import COmplete from "./pages/COmplete";
 
 export {
   Navbar,
@@ -19,5 +20,6 @@ export {
   FaimilyDetails,
   Stapper,
   Interest,
-  PartnersDetails
+  PartnersDetails,
+  COmplete,
 };

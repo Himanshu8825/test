@@ -26,39 +26,329 @@ const inputFields = [
   },
 ];
 
-const selectPlace = [
-  {
-    name: "country",
-    label: "Country",
-    options: ["India", "USA", "Pakistan", "Nepal", "Australia", "Bangladesh"],
-  },
-  {
-    name: "state",
-    label: "State",
-    options: [
-      "Bihar",
-      "Jharkhand",
-      "UP",
-      "MP",
-      "Kerala",
-      "Maharashtra",
-      "Nagpur",
+const selectPlace = {
+  India: {
+    states: [
+      {
+        name: "Bihar",
+        cities: [
+          "Patna",
+          "Aurangabad",
+          "Samastipur",
+          "Muzaffarpur",
+          "Ara",
+          "Chhapra",
+          "Darbhanga",
+        ],
+      },
+      {
+        name: "Maharashtra",
+        cities: [
+          "Mumbai",
+          "Pune",
+          "Nagpur",
+          "Nashik",
+          "Aurangabad",
+          "Solapur",
+          "Thane",
+        ],
+      },
+      {
+        name: "Uttar Pradesh",
+        cities: [
+          "Lucknow",
+          "Kanpur",
+          "Varanasi",
+          "Agra",
+          "Meerut",
+          "Allahabad",
+          "Ghaziabad",
+        ],
+      },
+      {
+        name: "Kerala",
+        cities: [
+          "Thiruvananthapuram",
+          "Kochi",
+          "Kozhikode",
+          "Thrissur",
+          "Kollam",
+          "Alappuzha",
+          "Palakkad",
+        ],
+      },
+      {
+        name: "Rajasthan",
+        cities: [
+          "Jaipur",
+          "Jodhpur",
+          "Udaipur",
+          "Ajmer",
+          "Kota",
+          "Bikaner",
+          "Alwar",
+        ],
+      },
     ],
   },
-  {
-    name: "city",
-    label: "City",
-    options: [
-      "Patna",
-      "Aurangabad",
-      "Samastipur",
-      "Muzaffarpur",
-      "Ara",
-      "Chhapra",
-      "Darbhanga",
+  USA: {
+    states: [
+      {
+        name: "California",
+        cities: [
+          "Los Angeles",
+          "San Francisco",
+          "San Diego",
+          "Sacramento",
+          "San Jose",
+          "Fresno",
+          "Oakland",
+        ],
+      },
+      {
+        name: "New York",
+        cities: [
+          "New York City",
+          "Buffalo",
+          "Rochester",
+          "Syracuse",
+          "Albany",
+          "Yonkers",
+          "Utica",
+        ],
+      },
+      {
+        name: "Texas",
+        cities: [
+          "Houston",
+          "Dallas",
+          "Austin",
+          "San Antonio",
+          "Fort Worth",
+          "El Paso",
+          "Arlington",
+        ],
+      },
+      {
+        name: "Florida",
+        cities: [
+          "Miami",
+          "Orlando",
+          "Tampa",
+          "Jacksonville",
+          "Fort Lauderdale",
+          "Tallahassee",
+          "Pensacola",
+        ],
+      },
+      {
+        name: "Illinois",
+        cities: [
+          "Chicago",
+          "Aurora",
+          "Rockford",
+          "Joliet",
+          "Naperville",
+          "Springfield",
+          "Peoria",
+        ],
+      },
     ],
   },
-];
+  Pakistan: {
+    states: [
+      {
+        name: "Punjab",
+        cities: [
+          "Lahore",
+          "Karachi",
+          "Faisalabad",
+          "Rawalpindi",
+          "Multan",
+          "Gujranwala",
+          "Sargodha",
+        ],
+      },
+      {
+        name: "Sindh",
+        cities: [
+          "Karachi",
+          "Hyderabad",
+          "Sukkur",
+          "Larkana",
+          "Mirpur Khas",
+          "Shikarpur",
+          "Jacobabad",
+        ],
+      },
+      {
+        name: "Khyber Pakhtunkhwa",
+        cities: [
+          "Peshawar",
+          "Abbottabad",
+          "Mardan",
+          "Swat",
+          "Nowshera",
+          "Kohat",
+          "Dera Ismail Khan",
+        ],
+      },
+      {
+        name: "Balochistan",
+        cities: [
+          "Quetta",
+          "Gwadar",
+          "Turbat",
+          "Khuzdar",
+          "Chaman",
+          "Sibi",
+          "Nushki",
+        ],
+      },
+      {
+        name: "Gilgit-Baltistan",
+        cities: [
+          "Gilgit",
+          "Skardu",
+          "Chilas",
+          "Astore",
+          "Hunza",
+          "Ghizer",
+          "Diamer",
+        ],
+      },
+    ],
+  },
+  Nepal: {
+    states: [
+      {
+        name: "Province No. 1",
+        cities: [
+          "Biratnagar",
+          "Birgunj",
+          "Dharan",
+          "Biratnagar",
+          "Itahari",
+          "Bhadrapur",
+          "Inaruwa",
+        ],
+      },
+      {
+        name: "Province No. 2",
+        cities: [
+          "Janakpur",
+          "Birgunj",
+          "Biratnagar",
+          "Hetauda",
+          "Dharan",
+          "Rajbiraj",
+          "Lahan",
+        ],
+      },
+      {
+        name: "Bagmati Province",
+        cities: [
+          "Kathmandu",
+          "Bhaktapur",
+          "Lalitpur",
+          "Kirtipur",
+          "Madhyapur Thimi",
+          "Banepa",
+          "Dhulikhel",
+        ],
+      },
+      {
+        name: "Gandaki Province",
+        cities: [
+          "Pokhara",
+          "Lamjung",
+          "Baglung",
+          "Beni",
+          "Ghiring",
+          "Bhirkot",
+          "Khairenitar",
+        ],
+      },
+      {
+        name: "Lumbini Province",
+        cities: [
+          "Butwal",
+          "Nepalgunj",
+          "Bhairahawa",
+          "Tansen",
+          "Bardaghat",
+          "Ghorahi",
+          "Kapilvastu",
+        ],
+      },
+    ],
+  },
+  Australia: {
+    states: [
+      {
+        name: "New South Wales",
+        cities: [
+          "Sydney",
+          "Newcastle",
+          "Wollongong",
+          "Central Coast",
+          "Port Macquarie",
+          "Coffs Harbour",
+          "Tamworth",
+        ],
+      },
+      {
+        name: "Victoria",
+        cities: [
+          "Melbourne",
+          "Geelong",
+          "Ballarat",
+          "Bendigo",
+          "Shepparton",
+          "Melton",
+          "Mildura",
+        ],
+      },
+      {
+        name: "Queensland",
+        cities: [
+          "Brisbane",
+          "Gold Coast",
+          "Sunshine Coast",
+          "Townsville",
+          "Cairns",
+          "Toowoomba",
+          "Mackay",
+        ],
+      },
+      {
+        name: "Western Australia",
+        cities: [
+          "Perth",
+          "Mandurah",
+          "Bunbury",
+          "Geraldton",
+          "Albany",
+          "Kalgoorlie",
+          "Fremantle",
+        ],
+      },
+      {
+        name: "South Australia",
+        cities: [
+          "Adelaide",
+          "Mount Gambier",
+          "Whyalla",
+          "Murray Bridge",
+          "Port Pirie",
+          "Port Augusta",
+          "Port Lincoln",
+        ],
+      },
+    ],
+  },
+};
+
 
 const radioGroups = [
   {
