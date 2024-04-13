@@ -16,20 +16,28 @@ const initialState = {
   city: "",
   religion: "",
   community: "",
+  sliderValue: [20, 37],
 };
 
-export const FaimilyDetailsSlice = createSlice({
-  name: "additionalDetails",
+export const FamilyDetailsSlice = createSlice({
+  name: "familyDetails",
   initialState,
   reducers: {
-    updateFaimilyDetails: (state, action) => {
+    updateFamilyDetails: (state, action) => {
       return {
         ...state,
         ...action.payload,
       };
     },
+    updateSliderValue: (state, action) => {
+      return {
+        ...state,
+        sliderValue: action.payload,
+      };
+    },
   },
 });
 
-export const { updateFaimilyDetails } = FaimilyDetailsSlice.actions;
-export default FaimilyDetailsSlice.reducer;
+export const { updateFamilyDetails, updateSliderValue } =
+  FamilyDetailsSlice.actions;
+export default FamilyDetailsSlice.reducer;

@@ -12,6 +12,8 @@ const initialState = {
   maritalStatus: "",
   contactNumber: "",
   email: "",
+  height: 0,
+  weight: 0,
 };
 
 export const AdditionalDetailsSlice = createSlice({
@@ -24,8 +26,15 @@ export const AdditionalDetailsSlice = createSlice({
         ...action.payload,
       };
     },
+    updateHeight: (state, action) => {
+      state.height = action.payload;
+    },
+    updateWeight: (state, action) => {
+      state.weight = action.payload;
+    },
   },
 });
 
-export const { updateAdditionalDetails } = AdditionalDetailsSlice.actions;
+export const { updateAdditionalDetails, updateHeight, updateWeight } =
+  AdditionalDetailsSlice.actions;
 export default AdditionalDetailsSlice.reducer;

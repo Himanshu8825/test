@@ -4,6 +4,7 @@ import { selectPlace } from "../Data";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePartner } from "../redux/Reducers/PartnerRedures";
 import { useNavigate } from "react-router-dom";
+import RangeSlider from "../Slider/MinimumDistance";
 
 const PartnersDetails = () => {
   const dispatch = useDispatch();
@@ -93,12 +94,32 @@ const PartnersDetails = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="w-[60%]  shadow-primary/50  shadow-lg rounded-xl">
+      <div className="w-[50%]  shadow-primary/50  shadow-lg rounded-xl">
         <h1 className="font-montserrat font-semibold text-xl text-center pb-8">
           Basic Details
         </h1>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
+            <span>
+              <h2 className="text-lg font-semibold font-montserrat pb-2 pt-4">
+                Age Range
+                <sup className="text-red-600 font-bold ">*</sup>
+              </h2>
+              <div>
+                <RangeSlider />
+              </div>
+            </span>
+
+            <span>
+              <h2 className="text-lg font-semibold font-montserrat pb-2 pt-4">
+                Height Range
+                <sup className="text-red-600 font-bold ">*</sup>
+              </h2>
+              <div>
+                <RangeSlider />
+              </div>
+            </span>
+
             {data.map((section, index) => (
               <span key={index} className="mt-4">
                 <h2 className="font-semibold font-montserrat">

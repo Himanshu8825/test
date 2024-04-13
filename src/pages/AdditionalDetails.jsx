@@ -1,8 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAdditionalDetails } from "../redux/Reducers/AdditionalDetailsReducers";
+import {
+  updateAdditionalDetails,
+  updateHeight,
+  updateWeight,
+} from "../redux/Reducers/AdditionalDetailsReducers";
 import { selectPlace, additionalRadio } from "../Data";
 import { StapperAction } from "../redux/action/StepersAction";
+import CustomizedSlider from "../Slider/Slider";
+
 
 const AdditionalDetails = () => {
   const dispatch = useDispatch();
@@ -27,6 +33,20 @@ const AdditionalDetails = () => {
       <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
+            <span>
+              <CustomizedSlider
+                label="Height"
+                value={formData.height}
+                onChange={(value) => dispatch(updateHeight(value))}
+              />
+
+              <CustomizedSlider
+                label="Weight (KGs)"
+                value={formData.weight}
+                onChange={(value) => dispatch(updateWeight(value))}
+              />
+            </span>
+
             <span>
               <h2 className="text-lg font-semibold font-montserrat  pb-2">
                 Personal Appearance

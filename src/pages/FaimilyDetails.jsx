@@ -1,9 +1,10 @@
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFaimilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
+import { updateFamilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
 import { selectPlace, faimilyData } from "../Data";
 import { StapperAction } from "../redux/action/StepersAction";
+import RangeSlider from "../Slider/MinimumDistance";
 
 const FamilyDetails = () => {
   const dispatch = useDispatch();
@@ -18,16 +19,16 @@ const FamilyDetails = () => {
         ...updatedSiblings[index],
         [name === "siblingsName" ? "name" : "status"]: value,
       };
-      dispatch(updateFaimilyDetails({ siblings: updatedSiblings }));
+      dispatch(updateFamilyDetails({ siblings: updatedSiblings }));
     } else {
-      dispatch(updateFaimilyDetails({ [name]: value }));
+      dispatch(updateFamilyDetails({ [name]: value }));
     }
   };
 
   //!Function to add a new sibling field
   const handleAddSibling = () => {
     dispatch(
-      updateFaimilyDetails({
+      updateFamilyDetails({
         siblings: [...formData.siblings, { name: "", status: "" }],
       })
     );
@@ -37,7 +38,7 @@ const FamilyDetails = () => {
   const handleRemoveSibling = (index) => {
     const updatedSiblings = [...formData.siblings];
     updatedSiblings.splice(index, 1);
-    dispatch(updateFaimilyDetails({ siblings: updatedSiblings }));
+    dispatch(updateFamilyDetails({ siblings: updatedSiblings }));
   };
 
   const updateCurrentState = () => {
@@ -309,6 +310,16 @@ const FamilyDetails = () => {
                     <option key={index}>{option}</option>
                   ))}
                 </select>
+              </div>
+            </span>
+
+            <span>
+              <h2 className="text-lg font-semibold font-montserrat pb-2 pt-4">
+                Family Annual Income Range (USD)
+                <sup className="text-red-600 font-bold ">*</sup>
+              </h2>
+              <div>
+                <RangeSlider />
               </div>
             </span>
 
