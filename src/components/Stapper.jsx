@@ -63,8 +63,6 @@ const Stapper = () => {
     return newSteps;
   };
 
-
-
   
   // Effect to update steps when currentStep changes
   useEffect(() => {

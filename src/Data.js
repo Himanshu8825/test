@@ -349,7 +349,6 @@ const selectPlace = {
   },
 };
 
-
 const radioGroups = [
   {
     label: "Manglik Status",
@@ -494,6 +493,25 @@ const faimilyData = [
   },
 ];
 
+const profileData = [
+  {
+    age: "40yrs , 5’7”",
+    caste: "Brahmin , Hindu",
+  },
+  {
+    dob: "03/10/1993",
+    birthPlace: "Delhi, India",
+  },
+  {
+    education: "B-tech, M-tech",
+    maritalStatus: "Never Married",
+  },
+  {
+    occupation: "Software Engineer",
+    diet: "Vegetarian",
+  },
+];
+
 export {
   inputFields,
   selectPlace,
@@ -501,4 +519,5 @@ export {
   additionalRadio,
   carrerData,
   faimilyData,
+  profileData,
 };
