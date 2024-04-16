@@ -12,13 +12,14 @@
 }
 
 
-select {
-  background-color: transparent;
+.setting-transition {
+  transition: max-height 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+}
+.setting-transition.show {
+  max-height: 300px; /* Adjust the value based on your content height */
 }
 
-option {
-  color: white;
-  font-weight: 400;
-  opacity: 0.2; /* Adjust the opacity as needed */
-  color: aqua;
-}
+
+
