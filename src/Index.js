@@ -9,7 +9,7 @@ import Stapper from "./components/Stapper";
 import Interest from "./RegistrationPages/Interest";
 import PartnersDetails from "./RegistrationPages/PartnersDetails";
 import Home from "./pages/Home";
-
+import Search from "./pages/Search";
 
 export {
   Navbar,
@@ -22,5 +22,6 @@ export {
   Stapper,
   Interest,
   PartnersDetails,
-  Home
+  Home,
+  Search,
 };

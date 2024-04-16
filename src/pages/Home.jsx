@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <>
       <div className="w-full  flex  gap-6 pl-16 pt-12">
-        <div className="pr-4  pl-4 bg-primary   rounded-xl">
+        <div className="pr-4  pl-4 bg-primary w-[30%]   rounded-xl">
           <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
             <img
               src={PrimaryImg}
@@ -112,18 +112,23 @@ const Home = () => {
                 <p className="text-center font-montserrat font-semibold text-4xl">
                   {item.number}
                 </p>
-                <p className="text-center font-montserrat text-lg font-medium">
+                <p className="text-center font-montserrat text-lg font-semibold">
                   {item.text}
                 </p>
               </div>
             ))}
           </div>
 
-          <h1 className=" font-montserrat font-semibold text-xl mt-8 mb-4">
-            All Matches
-          </h1>
+          <div className="flex justify-between">
+            <h1 className=" font-montserrat font-semibold text-xl mt-8 mb-4 cursor-pointer">
+              All Matches
+            </h1>
+            <h1 className=" font-montserrat font-semibold text-lg mt-8 mb-4 pr-8 cursor-pointer">
+              See All
+            </h1>
+          </div>
 
-          <div className=" grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div className="  shadow-primary shadow-md rounded-xl ">
               <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
                 <img

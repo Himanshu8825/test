@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 .setting-transition.show {
-  max-height: 300px; /* Adjust the value based on your content height */
+  max-height: 500px; /* Adjust the value based on your content height */
 }
 
 
