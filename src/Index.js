@@ -10,6 +10,7 @@ import Interest from "./RegistrationPages/Interest";
 import PartnersDetails from "./RegistrationPages/PartnersDetails";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
+import Matches from "./pages/Matches";
 
 export {
   Navbar,
@@ -24,4 +25,5 @@ export {
   PartnersDetails,
   Home,
   Search,
+  Matches,
 };

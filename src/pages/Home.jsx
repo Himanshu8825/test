@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <>
       <div className="w-full  flex  gap-6 pl-16 pt-12">
-        <div className="pr-4  pl-4 bg-primary w-[30%]   rounded-xl">
+        <div className="pr-4  pl-4 bg-primary w-[30%] h-[0%]   rounded-xl">
           <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
             <img
               src={PrimaryImg}
@@ -76,7 +76,7 @@ const Home = () => {
 
             <div
               className={`flex items-center pt-4 pl-2 gap-2 cursor-pointer ${
-                show ? "" : "pb-2"
+                show ? "" : ""
               }`}
               onClick={changeHandler}
             >
@@ -85,7 +85,7 @@ const Home = () => {
             </div>
 
             <div
-              className={`font-montserrat text-white flex flex-col gap-2 ml-8 mt-4 setting-transition text-[15px] font-light ${
+              className={`font-montserrat text-white flex flex-col gap-2 ml-8 mt-4 setting-transition text-[12px] font-light ${
                 show ? "show" : ""
               }`}
             >

@@ -11,7 +11,6 @@
   grid-template-columns: 1em auto;
 }
 
-
 .setting-transition {
   transition: max-height 0.3s ease-in-out;
   max-height: 0;
@@ -21,5 +20,7 @@
   max-height: 500px; /* Adjust the value based on your content height */
 }
 
-
-
+.shadoww {
+  background-color: #f0f0f0;
+  box-shadow: -2px 0px 10px 0px #a92525;
+}

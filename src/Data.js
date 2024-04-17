@@ -512,6 +512,8 @@ const profileData = [
   },
 ];
 
+
+
 export {
   inputFields,
   selectPlace,
@@ -520,4 +522,5 @@ export {
   carrerData,
   faimilyData,
   profileData,
+  
 };
