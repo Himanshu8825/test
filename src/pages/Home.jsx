@@ -7,6 +7,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { TbEyeCheck } from "react-icons/tb";
 import { RiUserFollowLine } from "react-icons/ri";
 import { MdBlockFlipped } from "react-icons/md";
+import { FaChevronDown } from "react-icons/fa";
 
 const Home = () => {
   const [show, setShow] = useState(false);
@@ -81,7 +82,10 @@ const Home = () => {
               onClick={changeHandler}
             >
               <IoSettingsOutline className="text-[25px] text-white" />
-              <p className=" font-montserrat  text-white">Setting</p>
+              <div className="flex items-center justify-between w-full pr-4">
+                <p className=" font-montserrat  text-white">Setting</p>
+                <FaChevronDown className="text-white" />
+              </div>
             </div>
 
             <div
@@ -146,7 +150,7 @@ const Home = () => {
               {profileData.map((data, index) => (
                 <div
                   key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-2 font-montserrat text-black font-medium "
+                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
                 >
                   {Object.values(data).map((value, index) => (
                     <p key={index}>{value}</p>
@@ -154,7 +158,7 @@ const Home = () => {
                 </div>
               ))}
 
-              <div className="pr-6 pl-6 flex justify-between text-white">
+              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
                 <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
                   <TbEyeCheck className="text-2xl" />
                 </div>
@@ -188,7 +192,7 @@ const Home = () => {
               {profileData.map((data, index) => (
                 <div
                   key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-2 font-montserrat text-black font-medium "
+                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
                 >
                   {Object.values(data).map((value, index) => (
                     <p key={index}>{value}</p>
@@ -196,7 +200,7 @@ const Home = () => {
                 </div>
               ))}
 
-              <div className="pr-6 pl-6 flex justify-between text-white">
+              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
                 <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
                   <TbEyeCheck className="text-2xl" />
                 </div>
@@ -230,7 +234,7 @@ const Home = () => {
               {profileData.map((data, index) => (
                 <div
                   key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-2 font-montserrat text-black font-medium "
+                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
                 >
                   {Object.values(data).map((value, index) => (
                     <p key={index}>{value}</p>
@@ -238,7 +242,7 @@ const Home = () => {
                 </div>
               ))}
 
-              <div className="pr-6 pl-6 flex justify-between text-white">
+              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
                 <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
                   <TbEyeCheck className="text-2xl" />
                 </div>

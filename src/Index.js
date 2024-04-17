@@ -11,6 +11,7 @@ import PartnersDetails from "./RegistrationPages/PartnersDetails";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Matches from "./pages/Matches";
+import Inbox from "./pages/Inbox";
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   Home,
   Search,
   Matches,
+  Inbox,
 };

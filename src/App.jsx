@@ -8,6 +8,7 @@ import {
   Home,
   Search,
   Matches,
+  Inbox,
 } from "./Index";
 
 const App = () => {
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/constent" element={<Constent />} />
           <Route path="/home" element={<Home />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/match" element={<Matches />} />
+          <Route path="/matches" element={<Matches />} />
+          <Route path="/inbox" element={<Inbox />} />
         </Routes>
       </>
     </Router>
