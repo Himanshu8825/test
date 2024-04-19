@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { NavIcon, PrimaryImg, SaveLogo } from "../assets/Index";
+import { NavIcon, PrimaryImg } from "../assets/Index";
 import { profileData } from "../Data";
 import { MdDashboard } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
-import { TbEyeCheck } from "react-icons/tb";
-import { RiUserFollowLine } from "react-icons/ri";
-import { MdBlockFlipped } from "react-icons/md";
 import { FaChevronDown } from "react-icons/fa";
+import Marquee from "react-fast-marquee";
+import HomeCard from "../components/HomeCard";
 
 const Home = () => {
   const [show, setShow] = useState(false);
@@ -29,7 +28,7 @@ const Home = () => {
   return (
     <>
       <div className="w-full  flex  gap-6 pl-16 pt-12">
-        <div className="pr-4  pl-4 bg-primary w-[30%] h-[0%]   rounded-xl">
+        <div className="pr-4  pl-4 bg-primary h-[0%]   rounded-xl">
           <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
             <img
               src={PrimaryImg}
@@ -103,7 +102,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full p-4">
+        <div className="p-4">
           <h1 className=" font-montserrat font-semibold text-xl">
             Your Activity Summary
           </h1>
@@ -132,132 +131,15 @@ const Home = () => {
             </h1>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div className="  shadow-primary shadow-md rounded-xl ">
-              <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
-                <img
-                  src={PrimaryImg}
-                  alt=""
-                  className="border-2 border-primary rounded-full w-[80px] h-[80px]"
-                />
-                <div className="gap-2 font-montserrat font-medium text-black">
-                  <p>
-                    Sonali Singh <span> ( CS12345 )</span>
-                  </p>
-                  <p className="text-center text-sm">Active now</p>
-                </div>
-              </div>
-              {profileData.map((data, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
-                >
-                  {Object.values(data).map((value, index) => (
-                    <p key={index}>{value}</p>
-                  ))}
-                </div>
-              ))}
-
-              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <TbEyeCheck className="text-2xl" />
-                </div>
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <RiUserFollowLine className="text-2xl" />
-                </div>
-              </div>
-              <div className="pr-6 pl-6 flex justify-between">
-                <div className="px-8 py-1 border border-primary mb-4 rounded-lg">
-                  <img src={SaveLogo} alt="" />
-                </div>
-                <div className="px-8 py-1 mb-4 rounded-lg">
-                  <MdBlockFlipped className="text-2xl text-primary" />
-                </div>
-              </div>
+          <div className="flex gap-4 flex-nowrap overflow-x-auto example">
+            <div className="w-[40%] flex-shrink-0  ">
+              <HomeCard />
             </div>
-            <div className="  shadow-primary shadow-md rounded-xl ">
-              <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
-                <img
-                  src={PrimaryImg}
-                  alt=""
-                  className="border-2 border-primary rounded-full w-[80px] h-[80px]"
-                />
-                <div className="gap-2 font-montserrat font-medium text-black">
-                  <p>
-                    Sonali Singh <span> ( CS12345 )</span>
-                  </p>
-                  <p className="text-center text-sm">Active now</p>
-                </div>
-              </div>
-              {profileData.map((data, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
-                >
-                  {Object.values(data).map((value, index) => (
-                    <p key={index}>{value}</p>
-                  ))}
-                </div>
-              ))}
-
-              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <TbEyeCheck className="text-2xl" />
-                </div>
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <RiUserFollowLine className="text-2xl" />
-                </div>
-              </div>
-              <div className="pr-6 pl-6 flex justify-between">
-                <div className="px-8 py-1 border border-primary mb-4 rounded-lg">
-                  <img src={SaveLogo} alt="" />
-                </div>
-                <div className="px-8 py-1 mb-4 rounded-lg">
-                  <MdBlockFlipped className="text-2xl text-primary" />
-                </div>
-              </div>
+            <div className="w-[40%] flex-shrink-0 ">
+              <HomeCard />
             </div>
-            <div className="  shadow-primary shadow-md rounded-xl ">
-              <div className="flex flex-col justify-center items-center pt-8 pl-8 pr-8 pb-4">
-                <img
-                  src={PrimaryImg}
-                  alt=""
-                  className="border-2 border-primary rounded-full w-[80px] h-[80px]"
-                />
-                <div className="gap-2 font-montserrat font-medium text-black">
-                  <p>
-                    Sonali Singh <span> ( CS12345 )</span>
-                  </p>
-                  <p className="text-center text-sm">Active now</p>
-                </div>
-              </div>
-              {profileData.map((data, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between pl-6 pr-6 pt-2 pb-1 font-montserrat text-black font-medium "
-                >
-                  {Object.values(data).map((value, index) => (
-                    <p key={index}>{value}</p>
-                  ))}
-                </div>
-              ))}
-
-              <div className="pr-6 pl-6 pt-2 flex justify-between text-white">
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <TbEyeCheck className="text-2xl" />
-                </div>
-                <div className="px-8 py-1 bg-primary mb-4 rounded-lg">
-                  <RiUserFollowLine className="text-2xl" />
-                </div>
-              </div>
-              <div className="pr-6 pl-6 flex justify-between">
-                <div className="px-8 py-1 border border-primary mb-4 rounded-lg">
-                  <img src={SaveLogo} alt="" />
-                </div>
-                <div className="px-8 py-1 mb-4 rounded-lg">
-                  <MdBlockFlipped className="text-2xl text-primary" />
-                </div>
-              </div>
+            <div className="w-[40%] flex-shrink-0">
+              <HomeCard />
             </div>
           </div>
         </div>

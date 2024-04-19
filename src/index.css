@@ -24,3 +24,8 @@
   background-color: #f0f0f0;
   box-shadow: -2px 0px 10px 0px #a92525;
 }
+
+
+.example::-webkit-scrollbar {
+  display: none;
+}
