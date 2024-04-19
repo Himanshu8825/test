@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Matches from "./pages/Matches";
 import Inbox from "./pages/Inbox";
+import MyProfile from "./pages/MyProfile";
 
 export {
   Navbar,
@@ -28,4 +29,5 @@ export {
   Search,
   Matches,
   Inbox,
+  MyProfile,
 };

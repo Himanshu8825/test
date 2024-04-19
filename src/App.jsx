@@ -9,7 +9,12 @@ import {
   Search,
   Matches,
   Inbox,
+  MyProfile,
 } from "./Index";
+import EditProfile from "./pages/EditProfile";
+import PreviewDetails from "./pages/PreviewDetails";
+import MyPhotos from "./pages/MyPhotos";
+import PartnerPrefrance from "./pages/PartnerPrefrance";
 
 const App = () => {
   // Function to render the appropriate component based on the current step
@@ -27,6 +32,11 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/inbox" element={<Inbox />} />
+          <Route path="/edit" element={<MyProfile />} />
+          <Route path="/edit2" element={<EditProfile />} />
+          <Route path="/edit3" element={<PreviewDetails />} />
+          <Route path="/edit4" element={<MyPhotos />} />
+          <Route path="/edit5" element={<PartnerPrefrance />} />
         </Routes>
       </>
     </Router>
