@@ -1,13 +1,7 @@
-// Slider.jsx
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
 import Box from "@mui/material/Box";
-import { useDispatch } from "react-redux";
-import {
-  updateHeight,
-  updateWeight,
-} from "../redux/Reducers/AdditionalDetailsReducers";
 
 const iOSBoxShadow =
   "0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)";
@@ -65,14 +59,13 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-const CustomizedSlider = ({ label, value }) => {
-  const dispatch = useDispatch();
+const CustomizedSlider = ({ label, value, onChange }) => {
+  const [localValue, setLocalValue] = useState(value);
 
   const handleChange = (event, newValue) => {
-    if (label === "Height") {
-      dispatch(updateHeight(newValue));
-    } else if (label === "Weight (KGs)") {
-      dispatch(updateWeight(newValue));
+    setLocalValue(newValue);
+    if (onChange) {
+      onChange(newValue);
     }
   };
 
@@ -81,7 +74,7 @@ const CustomizedSlider = ({ label, value }) => {
       <h2 className="text-lg font-semibold font-montserrat  pb-2">{label}</h2>
       <IOSSlider
         aria-label={`${label} Slider`}
-        value={value}
+        value={Number(localValue)} // Convert to number explicitly
         valueLabelDisplay="on"
         onChange={handleChange}
       />

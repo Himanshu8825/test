@@ -1,54 +1,109 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { updateFamilyDetails } from "../redux/Reducers/FaimilyDetailsReducers";
-import { selectPlace, faimilyData } from "../Data";
+import { useDispatch } from "react-redux";
 import { StapperAction } from "../redux/action/StepersAction";
+import { faimilyData, selectPlace } from "../Data";
 import RangeSlider from "../Slider/MinimumDistance";
 
 const FamilyDetails = () => {
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.faimilyDetails);
 
-  //!Function to handle changes in form fields
+  const [formData, setFormData] = useState({
+    fatherFirstName: "",
+    fatherMiddleName: "",
+    fatherLastName: "",
+    fatherOccupation: "",
+    motherFirstName: "",
+    motherMiddleName: "",
+    motherLastName: "",
+    motherOccupation: "",
+    siblings: [{ name: "", status: "" }],
+    livesWithFamily: "",
+    country: "",
+    state: "",
+    city: "",
+    religion: "",
+    community: "",
+    sliderValue: [20, 37],
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
+
     if (name === "siblingsName" || name === "siblingsStatus") {
       const updatedSiblings = [...formData.siblings];
       updatedSiblings[index] = {
         ...updatedSiblings[index],
         [name === "siblingsName" ? "name" : "status"]: value,
       };
-      dispatch(updateFamilyDetails({ siblings: updatedSiblings }));
+      setFormData((prevData) => ({
+        ...prevData,
+        siblings: updatedSiblings,
+      }));
     } else {
-      dispatch(updateFamilyDetails({ [name]: value }));
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
+
+    // Clear related errors when a field is changed
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "", // Clear the error for the changed field
+    }));
   };
 
-  //!Function to add a new sibling field
+  const validate = (val) => {
+    const errors = {};
+    const requiredFields = ["community", "country", "state", "city"];
+
+    requiredFields.forEach((field) => {
+      if (!val[field]) {
+        // Use the field value itself as the label
+        errors[field] = `${
+          field.charAt(0).toUpperCase() + field.slice(1)
+        } is required`;
+      }
+    });
+
+    return errors;
+  };
+
+  useEffect(() => {
+    console.log("The Error is", formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formData);
+    }
+  }, [formErrors]);
+
   const handleAddSibling = () => {
-    dispatch(
-      updateFamilyDetails({
-        siblings: [...formData.siblings, { name: "", status: "" }],
-      })
-    );
+    setFormData({
+      ...formData,
+      siblings: [...formData.siblings, { name: "", status: "" }],
+    });
   };
 
-  //!Function to remove a sibling field
   const handleRemoveSibling = (index) => {
     const updatedSiblings = [...formData.siblings];
     updatedSiblings.splice(index, 1);
-    dispatch(updateFamilyDetails({ siblings: updatedSiblings }));
+    setFormData({
+      ...formData,
+      siblings: updatedSiblings,
+    });
   };
 
-  const updateCurrentState = () => {
-    dispatch(StapperAction(5));
-  };
-
-  //!Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const errors = validate(formData);
+    setFormErrors(errors);
+    setIsSubmit(true);
+    if (Object.keys(errors).length === 0) {
+      dispatch(StapperAction(4));
+    }
   };
 
   const data1 = [
@@ -210,15 +265,15 @@ const FamilyDetails = () => {
 
             {/* Family Settled section */}
             <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2">
+              <h2 className="text-lg font-semibold font-montserrat pb-2">
                 Family Settled
-                <sup className="text-red-600 font-bold ">*</sup>
+                <sup className="text-red-600 font-bold">*</sup>
               </h2>
               <select
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
               >
                 <option value="">Select Country</option>
                 {Object.keys(selectPlace).map((country) => (
@@ -227,39 +282,52 @@ const FamilyDetails = () => {
                   </option>
                 ))}
               </select>
-
-              {formData.country && (
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                >
-                  <option value="">Select State</option>
-                  {selectPlace[formData.country].states.map((state) => (
-                    <option key={state.name} value={state.name}>
-                      {state.name}
-                    </option>
-                  ))}
-                </select>
+              {formErrors.country && (
+                <span className="text-red-600">{formErrors.country} </span>
               )}
 
-              {formData.state && selectPlace[formData.country] && (
-                <select
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                >
-                  <option value="">Select City</option>
-                  {selectPlace[formData.country].states
-                    .find((state) => state.name === formData.state)
-                    ?.cities.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
+              {formData.country && (
+                <>
+                  <select
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                  >
+                    <option value="">Select State</option>
+                    {selectPlace[formData.country]?.states.map((state) => (
+                      <option key={state.name} value={state.name}>
+                        {state.name}
                       </option>
                     ))}
-                </select>
+                  </select>
+                  {formErrors.state && (
+                    <span className="text-red-600">{formErrors.state}</span>
+                  )}
+                </>
+              )}
+
+              {formData.state && (
+                <>
+                  <select
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                  >
+                    <option value="">Select City</option>
+                    {selectPlace[formData.country].states
+                      .find((state) => state.name === formData.state)
+                      ?.cities.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                  </select>
+                  {formErrors.city && (
+                    <span className="text-red-600">{formErrors.city}</span>
+                  )}
+                </>
               )}
             </span>
 
@@ -294,11 +362,11 @@ const FamilyDetails = () => {
 
             {/* Community section */}
             <span>
-              <h2 className="text-lg font-semibold font-montserrat  pb-2 pt-4">
+              <h2 className="text-lg font-semibold font-montserrat pb-2 pt-4">
                 Community
-                <sup className="text-red-600 font-bold ">*</sup>
+                <sup className="text-red-600 font-bold">*</sup>
               </h2>
-              <div className="flex gap-4 items-center ">
+              <div className="flex gap-4 items-center">
                 <select
                   name="community"
                   value={formData.community || ""}
@@ -307,10 +375,15 @@ const FamilyDetails = () => {
                 >
                   <option value="">Community</option>
                   {communityOptions.map((option, index) => (
-                    <option key={index}>{option}</option>
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
                   ))}
                 </select>
               </div>
+              {formErrors["community"] && (
+                <span className="text-red-600 ">{formErrors["community"]}</span>
+              )}
             </span>
 
             <span>
@@ -328,7 +401,6 @@ const FamilyDetails = () => {
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
-                onClick={updateCurrentState}
               >
                 Continue
               </button>

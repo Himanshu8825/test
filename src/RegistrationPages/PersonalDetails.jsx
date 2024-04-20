@@ -1,22 +1,77 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updatePersonalDetails } from "../redux/Reducers/PersonalDetailsReducers";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { inputFields, selectPlace, radioGroups } from "../Data";
 import { StapperAction } from "../redux/action/StepersAction";
 
 const PersonalDetails = () => {
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.personalDetails);
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    dateOfBirth: "",
+    timeOfBirth: "",
+    country: "",
+    state: "",
+    city: "",
+    manglikStatus: "",
+    horoscopeMatching: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updatePersonalDetails({ [name]: value }));
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(StapperAction(2));
-    console.log(formData);
+    const errors = validate(formData);
+    setFormErrors(errors);
+    setIsSubmit(true);
+    if (!errors || Object.keys(errors).length === 0) {
+      dispatch(StapperAction(2));
+    }
+  };
+
+  useEffect(() => {
+    console.log("The Error is", formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formData);
+    }
+  }, [formErrors]);
+
+  const validate = (val) => {
+    const errors = {};
+    const requiredFields = [
+      "firstName",
+      "middleName",
+      "lastName",
+      "dateOfBirth",
+      "timeOfBirth",
+      "country",
+      "state",
+      "city",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!val[field]) {
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        errors[field] = `${label} is required`;
+      }
+    });
+
+    return errors;
   };
 
   return (
@@ -36,9 +91,14 @@ const PersonalDetails = () => {
                     name={field.name}
                     value={formData[field.name]}
                     onChange={handleChange}
-                    className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
+                    className="w-full py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                     placeholder={field.label}
                   />
+                  {formErrors[field.name] && (
+                    <span className="text-red-600 ">
+                      {formErrors[field.name]}
+                    </span>
+                  )}
                 </span>
               ))}
 
@@ -51,7 +111,7 @@ const PersonalDetails = () => {
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                  className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
                 >
                   <option value="">Select Country</option>
                   {Object.keys(selectPlace).map((country) => (
@@ -60,39 +120,52 @@ const PersonalDetails = () => {
                     </option>
                   ))}
                 </select>
-
-                {formData.country && (
-                  <select
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                  >
-                    <option value="">Select State</option>
-                    {selectPlace[formData.country].states.map((state) => (
-                      <option key={state.name} value={state.name}>
-                        {state.name}
-                      </option>
-                    ))}
-                  </select>
+                {formErrors.country && (
+                  <span className="text-red-600">{formErrors.country} </span>
                 )}
 
-                {formData.state && selectPlace[formData.country] && (
-                  <select
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                  >
-                    <option value="">Select City</option>
-                    {selectPlace[formData.country].states
-                      .find((state) => state.name === formData.state)
-                      ?.cities.map((city) => (
-                        <option key={city} value={city}>
-                          {city}
+                {formData.country && (
+                  <>
+                    <select
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                    >
+                      <option value="">Select State</option>
+                      {selectPlace[formData.country]?.states.map((state) => (
+                        <option key={state.name} value={state.name}>
+                          {state.name}
                         </option>
                       ))}
-                  </select>
+                    </select>
+                    {formErrors.state && (
+                      <span className="text-red-600">{formErrors.state}</span>
+                    )}
+                  </>
+                )}
+
+                {formData.state && (
+                  <>
+                    <select
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                    >
+                      <option value="">Select City</option>
+                      {selectPlace[formData.country].states
+                        .find((state) => state.name === formData.state)
+                        ?.cities.map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                    </select>
+                    {formErrors.city && (
+                      <span className="text-red-600">{formErrors.city}</span>
+                    )}
+                  </>
                 )}
               </span>
 
@@ -101,7 +174,6 @@ const PersonalDetails = () => {
                   <div key={index}>
                     <h2 className="text-lg font-semibold font-montserrat pb-2">
                       {group.label}
-                      <sup className="text-red-600 font-bold">*</sup>
                     </h2>
                     {group.options.map((option, optionIndex) => (
                       <div className="flex pl-4" key={optionIndex}>

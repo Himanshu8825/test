@@ -1,31 +1,78 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  updateAdditionalDetails,
-  updateHeight,
-  updateWeight,
-} from "../redux/Reducers/AdditionalDetailsReducers";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { selectPlace, additionalRadio } from "../Data";
 import { StapperAction } from "../redux/action/StepersAction";
 import CustomizedSlider from "../Slider/Slider";
 
-
 const AdditionalDetails = () => {
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.additionalDetails);
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [formData, setFormData] = useState({
+    personalAppearance: "",
+    country: "",
+    state: "",
+    city: "",
+    relocate: "",
+    dietType: "",
+    alcoholPreference: "",
+    smokingPreference: "",
+    maritalStatus: "",
+    contactNumber: "",
+    email: "",
+    height: "",
+    weight: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updateAdditionalDetails({ [name]: value }));
-  };
-
-  const updateCurrentState = () => {
-    dispatch(StapperAction(3));
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("This is the form Data", formData);
+    const errors = validate(formData);
+    setFormErrors(errors);
+    setIsSubmit(true);
+    console.log(formData);
+    if (!errors || Object.keys(errors).length === 0) {
+      dispatch(StapperAction(3));
+    }
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formData);
+    }
+  }, [formErrors]);
+
+  const validate = (val) => {
+    const errors = {};
+    const requiredFields = [
+      "contactNumber",
+      "email",
+      "country",
+      "state",
+      "city",
+    ];
+
+    requiredFields.forEach((field) => {
+      if (!val[field]) {
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        errors[field] = `${label} is required`;
+      }
+    });
+
+    return errors;
   };
 
   return (
@@ -37,13 +84,17 @@ const AdditionalDetails = () => {
               <CustomizedSlider
                 label="Height"
                 value={formData.height}
-                onChange={(value) => dispatch(updateHeight(value))}
+                onChange={(value) =>
+                  setFormData((prevData) => ({ ...prevData, height: value }))
+                }
               />
 
               <CustomizedSlider
                 label="Weight (KGs)"
                 value={formData.weight}
-                onChange={(value) => dispatch(updateWeight(value))}
+                onChange={(value) =>
+                  setFormData((prevData) => ({ ...prevData, weight: value }))
+                }
               />
             </span>
 
@@ -71,7 +122,7 @@ const AdditionalDetails = () => {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
               >
                 <option value="">Select Country</option>
                 {Object.keys(selectPlace).map((country) => (
@@ -80,39 +131,52 @@ const AdditionalDetails = () => {
                   </option>
                 ))}
               </select>
-
-              {formData.country && (
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                >
-                  <option value="">Select State</option>
-                  {selectPlace[formData.country].states.map((state) => (
-                    <option key={state.name} value={state.name}>
-                      {state.name}
-                    </option>
-                  ))}
-                </select>
+              {formErrors.country && (
+                <span className="text-red-600">{formErrors.country} </span>
               )}
 
-              {formData.state && selectPlace[formData.country] && (
-                <select
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
-                >
-                  <option value="">Select City</option>
-                  {selectPlace[formData.country].states
-                    .find((state) => state.name === formData.state)
-                    ?.cities.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
+              {formData.country && (
+                <>
+                  <select
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                  >
+                    <option value="">Select State</option>
+                    {selectPlace[formData.country]?.states.map((state) => (
+                      <option key={state.name} value={state.name}>
+                        {state.name}
                       </option>
                     ))}
-                </select>
+                  </select>
+                  {formErrors.state && (
+                    <span className="text-red-600">{formErrors.state}</span>
+                  )}
+                </>
+              )}
+
+              {formData.state && (
+                <>
+                  <select
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0] w-full"
+                  >
+                    <option value="">Select City</option>
+                    {selectPlace[formData.country].states
+                      .find((state) => state.name === formData.state)
+                      ?.cities.map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                  </select>
+                  {formErrors.city && (
+                    <span className="text-red-600">{formErrors.city}</span>
+                  )}
+                </>
               )}
             </span>
 
@@ -120,7 +184,6 @@ const AdditionalDetails = () => {
               <span key={index} className="mt-4">
                 <h2 className="font-semibold font-montserrat">
                   {section.title}
-                  <sup className="text-red-600 font-bold">*</sup>
                 </h2>
                 {section.options.map((option, optionIndex) => (
                   <div key={optionIndex} className="flex pl-4">
@@ -150,12 +213,15 @@ const AdditionalDetails = () => {
               </h2>
               <input
                 type="text"
-                className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
+                className="w-full py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Contact Number"
                 name="contactNumber"
                 value={formData.contactNumber}
                 onChange={handleChange}
               />
+              {formErrors.contactNumber && (
+                <span className="text-red-600">{formErrors.contactNumber}</span>
+              )}
             </span>
 
             <span className="mt-4">
@@ -165,19 +231,22 @@ const AdditionalDetails = () => {
               </h2>
               <input
                 type="email"
-                className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
+                className="w-full py-3 mb-2 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                 placeholder="Email Id"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
               />
+              {formErrors.email && (
+                <span className="text-red-600">{formErrors.email}</span>
+              )}
             </span>
 
             <div className="flex justify-center  pb-4">
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
-                onClick={updateCurrentState}
+                // onClick={updateCurrentState}
               >
                 Continue
               </button>

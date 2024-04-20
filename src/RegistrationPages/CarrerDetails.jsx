@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCarrerDetails } from "../redux/Reducers/CarrerDetailsReducers";
 import { carrerData } from "../Data";
@@ -6,40 +6,90 @@ import { StapperAction } from "../redux/action/StepersAction";
 
 const CarrerDetails = () => {
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.carrerDetails);
-  const [income, setIncome] = useState(formData.annualIncome);
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [income, setIncome] = useState("");
+
+  const [formData, setFormData] = useState({
+    education: "",
+    highestQualification: "",
+    schoolOrUniversity: "",
+    profession: "",
+    currentDesignation: "",
+    previousOccupation: "",
+    annualIncomeType: "",
+    annualIncome: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
     if (name === "annualIncomeType") {
+      let updatedIncome = formData.annualIncome;
       switch (value) {
         case "Indian Rupee (INR)":
-          setIncome(`₹${income.replace(/[^0-9]/g, "")}`);
+          updatedIncome = `₹${formData.annualIncome.replace(/[^0-9]/g, "")}`;
           break;
         case "United States Dollar (USD)":
-          setIncome(`$${income.replace(/[^0-9.]/g, "")}`);
+          updatedIncome = `$${formData.annualIncome.replace(/[^0-9.]/g, "")}`;
           break;
         case "United Arab Emirates Dirham (AED)":
-          setIncome(`AED ${income.replace(/[^0-9.]/g, "")}`);
+          updatedIncome = `AED ${formData.annualIncome.replace(
+            /[^0-9.]/g,
+            ""
+          )}`;
           break;
         case "United Kingdom Pound (GBP)":
-          setIncome(`£${income.replace(/[^0-9.]/g, "")}`);
+          updatedIncome = `£${formData.annualIncome.replace(/[^0-9.]/g, "")}`;
           break;
         default:
-          setIncome(income.replace(/[₹$AED£]/g, ""));
+          updatedIncome = formData.annualIncome.replace(/[₹$AED£]/g, "");
       }
-    } else {
-      dispatch(updateCarrerDetails({ [name]: value }));
+      setFormData((prevData) => ({
+        ...prevData,
+        annualIncome: updatedIncome,
+        [name]: value,
+      }));
     }
-  };
-
-  const updateCurrentState = () => {
-    dispatch(StapperAction(4));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const errors = validate(formData);
+    setFormErrors(errors);
+    setIsSubmit(true);
+    if (!errors || Object.keys(errors).length === 0) {
+      dispatch(StapperAction(4));
+    }
+  };
+
+  useEffect(() => {
+    console.log("The Error is", formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formData);
+    }
+  }, [formErrors]);
+
+  const validate = (val) => {
+    const errors = {};
+    const requiredFields = ["education"];
+
+    requiredFields.forEach((field) => {
+      if (!val[field]) {
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        errors[field] = `${label} is required`;
+      }
+    });
+
+    return errors;
   };
 
   return (
@@ -78,8 +128,8 @@ const CarrerDetails = () => {
                   <input
                     type="text"
                     name={field.name}
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
+                    value={formData.annualIncome}
+                    onChange={handleChange}
                     className="w-full py-3 mb-4 rounded-lg focus:outline-none px-2 text-[#A0A0A0] bg-[#F0F0F0]"
                     placeholder={field.label}
                   />
@@ -94,6 +144,7 @@ const CarrerDetails = () => {
                     placeholder={field.label}
                   />
                 )}
+
                 {field.type === "select" && (
                   <select
                     name={field.name}
@@ -108,13 +159,17 @@ const CarrerDetails = () => {
                     ))}
                   </select>
                 )}
+                {/* Conditionally render the error message for the "education" field */}
+                {field.name === "education" && formErrors[field.name] && (
+                  <p className="text-red-600">{formErrors[field.name]}</p>
+                )}
               </span>
             ))}
+
             <div className="mx-auto p-8">
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"
-                onClick={updateCurrentState}
               >
                 Continue
               </button>

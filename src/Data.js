@@ -439,7 +439,7 @@ const carrerData = [
   {
     label: "Profession",
     type: "select",
-    options: ["", "Doctor", "Engineer", "Advocate", "Gov Job"],
+    options: ["Profession", "Doctor", "Engineer", "Advocate", "Gov Job"],
     name: "profession",
   },
   {
