@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Matches from "./pages/Matches";
 import Inbox from "./pages/Inbox";
-import MyProfile from "./pages/MyProfile";
+import MyProfile from "./pages/EditPAges/MyProfile";
 import UpdateContact from "./pages/UpdatePages/UpdateContact";
 
 export {

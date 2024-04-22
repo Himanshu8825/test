@@ -67,7 +67,7 @@ export default function RangeSlider() {
   };
 
   return (
-    <Box sx={{ width: 480 }}>
+    <Box sx={{ width: 500 }}>
       <StyledSlider
         getAriaLabel={() => "Temperature range"}
         value={value}

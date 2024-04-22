@@ -12,10 +12,11 @@ import {
   MyProfile,
   UpdateContact,
 } from "./Index";
-import EditProfile from "./pages/EditProfile";
-import PreviewDetails from "./pages/PreviewDetails";
-import MyPhotos from "./pages/MyPhotos";
-import PartnerPrefrance from "./pages/PartnerPrefrance";
+import EditProfile from "./pages/EditPAges/EditProfile";
+import PreviewDetails from "./pages/EditPAges/PreviewDetails";
+import MyPhotos from "./pages/EditPAges/MyPhotos";
+import PartnerPrefrance from "./pages/EditPAges/PartnerPrefrance";
+import PartnerPrefranceEdit from "./pages/EditPAges/PartnerPrefranceEdit";
 
 const App = () => {
   // Function to render the appropriate component based on the current step
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/edit3" element={<PreviewDetails />} />
           <Route path="/edit4" element={<MyPhotos />} />
           <Route path="/edit5" element={<PartnerPrefrance />} />
+          <Route path="/edit6" element={<PartnerPrefranceEdit />} />
           <Route path="/update" element={<UpdateContact />} />
         </Routes>
       </>

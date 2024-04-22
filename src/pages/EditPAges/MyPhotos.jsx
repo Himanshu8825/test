@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   updateAboutYourself,
   updatePhotos,
-} from "../redux/Reducers/InterestReducers";
-import { StapperAction } from "../redux/action/StepersAction";
+} from "../../redux/Reducers/InterestReducers";
+import { StapperAction } from "../../redux/action/StepersAction";
 
 const MyPhotos = () => {
   const dispatch = useDispatch();

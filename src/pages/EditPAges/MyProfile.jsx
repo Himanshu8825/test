@@ -1,6 +1,6 @@
 import React from "react";
-import { PrimaryImg } from "../assets/Index";
-import { profileData } from "../Data";
+import { PrimaryImg } from "../../assets/Index";
+import { profileData } from "../../Data";
 import { IoEye } from "react-icons/io5";
 import { FaEdit } from "react-icons/fa";
 
