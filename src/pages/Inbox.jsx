@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { SaveLogo } from "../assets/Index";
-import { TbEyeCheck } from "react-icons/tb";
-import { RiUserFollowLine } from "react-icons/ri";
-import { MdBlockFlipped } from "react-icons/md";
+
 import ProfileRequestCard from "../components/ProfileRequestCard";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa";

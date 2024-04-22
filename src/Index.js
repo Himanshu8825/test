@@ -13,6 +13,7 @@ import Search from "./pages/Search";
 import Matches from "./pages/Matches";
 import Inbox from "./pages/Inbox";
 import MyProfile from "./pages/MyProfile";
+import UpdateContact from "./pages/UpdatePages/UpdateContact";
 
 export {
   Navbar,
@@ -30,4 +31,5 @@ export {
   Matches,
   Inbox,
   MyProfile,
+  UpdateContact,
 };

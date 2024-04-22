@@ -10,6 +10,7 @@ import {
   Matches,
   Inbox,
   MyProfile,
+  UpdateContact,
 } from "./Index";
 import EditProfile from "./pages/EditProfile";
 import PreviewDetails from "./pages/PreviewDetails";
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/edit3" element={<PreviewDetails />} />
           <Route path="/edit4" element={<MyPhotos />} />
           <Route path="/edit5" element={<PartnerPrefrance />} />
+          <Route path="/update" element={<UpdateContact />} />
         </Routes>
       </>
     </Router>
