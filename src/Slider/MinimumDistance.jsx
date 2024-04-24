@@ -18,8 +18,7 @@ const StyledSlider = styled(Slider)(({ theme }) => ({
     boxShadow: "0 0 2px 0px rgba(0, 0, 0, 0.1)",
     "&:focus, &:hover, &.Mui-active": {
       boxShadow: "0px 0px 3px 1px rgba(0, 0, 0, 0.1)",
-      "@media (hover: none)": {
-      },
+      "@media (hover: none)": {},
     },
     "&:before": {
       boxShadow:
@@ -67,7 +66,7 @@ export default function RangeSlider() {
   };
 
   return (
-    <Box sx={{ width: 500 }}>
+    <Box className="w-full sm:w-80 md:w-96 lg:w-112 xl:w-128 mx-auto">
       <StyledSlider
         getAriaLabel={() => "Temperature range"}
         value={value}

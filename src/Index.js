@@ -14,6 +14,7 @@ import Matches from "./pages/Matches";
 import Inbox from "./pages/Inbox";
 import MyProfile from "./pages/EditPAges/MyProfile";
 import UpdateContact from "./pages/UpdatePages/UpdateContact";
+import Dashboard from "./pages/Dashboard";
 
 export {
   Navbar,
@@ -32,4 +33,5 @@ export {
   Inbox,
   MyProfile,
   UpdateContact,
+  Dashboard,
 };

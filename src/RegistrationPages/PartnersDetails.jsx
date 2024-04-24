@@ -94,7 +94,7 @@ const PartnersDetails = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="w-[50%]  shadow-primary/50  shadow-lg rounded-xl">
+      <div className="md:w-[50%] w-full   md:shadow-primary/50  md:shadow-lg rounded-xl">
         <h1 className="font-montserrat font-semibold text-xl text-center pb-8">
           Basic Details
         </h1>
@@ -121,19 +121,19 @@ const PartnersDetails = () => {
             </span>
 
             {data.map((section, index) => (
-              <span key={index} className="mt-4">
+              <span key={index} className="mt-">
                 <h2 className="font-semibold font-montserrat">
                   {section.title}
                   <sup className="text-red-600 font-bold">*</sup>
                 </h2>
                 {section.options.map((option, optionIndex) => (
-                  <div key={optionIndex} className="flex pl-4">
+                  <div key={optionIndex} className="flex gap-2 mt-1 pl-4">
                     <input
                       type="radio"
                       id={`${section.name}-${option}`}
                       name={section.name}
                       value={option}
-                      className="mr-2"
+                      className=""
                       onChange={handleChange}
                     />
                     <label
@@ -228,13 +228,13 @@ const PartnersDetails = () => {
                   <sup className="text-red-600 font-bold">*</sup>
                 </h2>
                 {section.options.map((option, optionIndex) => (
-                  <div key={optionIndex} className="flex pl-4">
+                  <div key={optionIndex} className="flex gap-2 mt-1 pl-4">
                     <input
                       type="radio"
                       id={`${section.name}-${option}`}
                       name={section.name}
                       value={option}
-                      className="mr-2"
+                      
                       onChange={handleChange}
                     />
                     <label
@@ -275,13 +275,13 @@ const PartnersDetails = () => {
                   <sup className="text-red-600 font-bold">*</sup>
                 </h2>
                 {section.options.map((option, optionIndex) => (
-                  <div key={optionIndex} className="flex pl-4">
+                  <div key={optionIndex} className="flex pl-4 gap-2 mt-1">
                     <input
                       type="radio"
                       id={`${section.name}-${option}`}
                       name={section.name}
                       value={option}
-                      className="mr-2"
+                      
                       onChange={handleChange}
                     />
                     <label

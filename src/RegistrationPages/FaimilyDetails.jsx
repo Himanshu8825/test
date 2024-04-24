@@ -147,7 +147,7 @@ const FamilyDetails = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
       {/* Form container */}
-      <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
+      <div className="md:w-[45%] w-full md:shadow-primary/50  md:shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto">
             {faimilyData.map((field, index) => (
@@ -240,7 +240,7 @@ const FamilyDetails = () => {
                 Bride/Groom Lives With Family
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              <div className="flex flex-col pl-4">
+              <div className="flex flex-col gap-1 pl-4">
                 {data1.map((option) => (
                   <div key={option.id} className="flex  items-center mr-4">
                     <input
@@ -337,7 +337,7 @@ const FamilyDetails = () => {
                 Religion
                 <sup className="text-red-600 font-bold ">*</sup>
               </h2>
-              <div className="flex flex-col pl-4">
+              <div className="flex flex-col gap-1 pl-4">
                 {data2.map((option) => (
                   <div key={option.id} className="flex items-center mr-4">
                     <input

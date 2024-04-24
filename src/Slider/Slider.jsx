@@ -70,8 +70,8 @@ const CustomizedSlider = ({ label, value, onChange }) => {
   };
 
   return (
-    <Box sx={{ width: 480 }}>
-      <h2 className="text-lg font-semibold font-montserrat  pb-2">{label}</h2>
+    <Box className="w-full sm:w-80 md:w-96 lg:w-112 xl:w-128 mx-auto">
+      <h2 className="text-lg font-semibold font-montserrat pb-2">{label}</h2>
       <IOSSlider
         aria-label={`${label} Slider`}
         value={Number(localValue)} // Convert to number explicitly

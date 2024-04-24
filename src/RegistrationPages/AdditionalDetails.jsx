@@ -77,7 +77,7 @@ const AdditionalDetails = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
+      <div className="md:w-[45%] w-full md:shadow-primary/50  md:shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
             <span>
@@ -242,7 +242,7 @@ const AdditionalDetails = () => {
               )}
             </span>
 
-            <div className="flex justify-center  pb-4">
+            <div className="flex justify-center  pb-6 md:pt-4 ss:pt-4 pt-8">
               <button
                 type="submit"
                 className="px-8 py-2 bg-[#A92525] font-montserrat rounded-lg text-white"

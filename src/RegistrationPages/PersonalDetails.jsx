@@ -77,7 +77,7 @@ const PersonalDetails = () => {
   return (
     <div>
       <div className="w-full flex flex-col justify-center items-center pb-8">
-        <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
+        <div className="md:w-[45%] w-full md:shadow-primary/50  md:shadow-lg rounded-xl">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col w-[80%] h-[80%] mx-auto">
               {inputFields.map((field) => (

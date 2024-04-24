@@ -9,7 +9,6 @@ const CarrerDetails = () => {
 
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [income, setIncome] = useState("");
 
   const [formData, setFormData] = useState({
     education: "",
@@ -93,10 +92,10 @@ const CarrerDetails = () => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="w-[45%] shadow-primary/50  shadow-lg rounded-xl">
+    <div className="w-full flex flex-col justify-center items-center ">
+      <div className="md:w-[45%] w-full md:shadow-primary/50  md:shadow-lg rounded-xl">
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col w-[80%] h-[80%] mx-auto">
+          <div className="flex flex-col w-[80%]  mx-auto">
             {carrerData.map((field, index) => (
               <span key={index}>
                 <h2 className="text-lg font-semibold font-montserrat pt-6">

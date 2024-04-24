@@ -9,7 +9,7 @@ const SignUp = () => {
   const [show, setShow] = useState(false);
 
   const handleChange = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
     navigate('/details')
   };
 

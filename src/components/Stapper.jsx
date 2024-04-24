@@ -91,7 +91,7 @@ const Stapper = () => {
           : "flex items-center"
       }
     >
-      <div className="relative flex flex-col items-center text-black font-montserrat font-bold">
+      <div className="relative  flex flex-col items-center text-black font-montserrat font-bold">
         <div
           className={`rounded-full transition duration-500 ease-in-out shadow-md h-14 w-14 flex items-center justify-center py-3 cursor-pointer ${
             step.selected ? "bg-[#A92525] font-bold " : "bg-white shadow-md"
@@ -121,8 +121,8 @@ const Stapper = () => {
   ));
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex mb-8 w-[60%] mx-auto p-8">{displaySteps}</div>
+    <div className="flex flex-col gap-4 overflow-hidden">
+      <div className="flex mb-8 md:w-[60%] w-full md:gap-0 gap-4 mx-auto p-8">{displaySteps}</div>
       <DisplayStepsform currentStep={currentStep} />
     </div>
   );

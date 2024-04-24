@@ -49,7 +49,7 @@ const Interest = () => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center pb-8">
-      <div className="w-[60%] shadow-primary/50  shadow-lg rounded-xl">
+      <div className="md:w-[60%] w-full shadow-primary/50  shadow-lg rounded-xl">
         <form>
           <div className="flex flex-col w-[80%] h-[80%] mx-auto mt-8">
             <span>
@@ -91,14 +91,14 @@ const Interest = () => {
             </span>
 
             <span>
-              <div className="grid grid-cols-4 gap-4 items-center">
+              <div className="grid md:grid-cols-4 grid-cols-2 gap-4 items-center">
                 {selectedImages.map((image, index) => (
                   <div key={index}>
                     <div>
                       <img
                         src={image}
                         alt=""
-                        className="w-[150px] h-[150px] rounded-lg border border-[#A92525]"
+                        className="md:w-[150px] md:h-[150px]  rounded-lg border border-[#A92525]"
                       />
                     </div>
                     <div

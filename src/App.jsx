@@ -11,6 +11,7 @@ import {
   Inbox,
   MyProfile,
   UpdateContact,
+  Dashboard,
 } from "./Index";
 import EditProfile from "./pages/EditPAges/EditProfile";
 import PreviewDetails from "./pages/EditPAges/PreviewDetails";
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/edit5" element={<PartnerPrefrance />} />
           <Route path="/edit6" element={<PartnerPrefranceEdit />} />
           <Route path="/update" element={<UpdateContact />} />
+          <Route path="/sucess" element={<Dashboard />} />
         </Routes>
       </>
     </Router>
